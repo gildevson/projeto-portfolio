@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <div class="navbar__brand">GILSON FONSECA</div>
+
+  <!-- Desktop links -->
+  <ul class="navbar__links">
+    <li><a href="#servicos">SERVIÇOS</a></li>
+    <li><a href="#projetos">PROJETOS</a></li>
+    <li><a href="#sobre">SOBRE MIM</a></li>
+    <li><a href="#contato">CONTATO</a></li>
+  </ul>
+
+  <!-- Mobile: X or hamburger -->
+  <button class="navbar__burger" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
+    @if (menuOpen()) {
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <line x1="2" y1="2" x2="18" y2="18" stroke="white" stroke-width="1.5"/>
+        <line x1="18" y1="2" x2="2" y2="18" stroke="white" stroke-width="1.5"/>
+      </svg>
+    } @else {
+      <svg width="22" height="14" viewBox="0 0 22 14" fill="none">
+        <line x1="0" y1="1" x2="22" y2="1" stroke="white" stroke-width="1.5"/>
+        <line x1="0" y1="13" x2="22" y2="13" stroke="white" stroke-width="1.5"/>
+      </svg>
+    }
+  </button>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div class="navbar__mobile" [ngClass]="{ active: menuOpen() }">
+  <ul class="navbar__mobile-links">
+    <li><a href="#servicos" (click)="toggleMenu()">Serviços</a></li>
+    <li><a href="#projetos" (click)="toggleMenu()">Projetos</a></li>
+    <li><a href="#sobre" (click)="toggleMenu()">Sobre mim</a></li>
+    <li><a href="#contato" (click)="toggleMenu()">Contato</a></li>
+  </ul>
+
+  <div class="navbar__mobile-footer">
+    <p class="navbar__mobile-location">LOCALIZADO EM BRASIL</p>
+    <div class="navbar__mobile-role">DESENVOLVEDOR FULL STACK · ENGENHARIA DE SOFTWARE</div>
+  </div>
+</div>

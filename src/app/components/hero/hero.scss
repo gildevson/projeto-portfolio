@@ -1,0 +1,141 @@
+// --- keyframes ---
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes revealName {
+  0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
+  100% { opacity: 1; clip-path: inset(0 0% 0 0); }
+}
+
+// --- component ---
+
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: #000;
+
+  &__photo {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    // starts invisible, fades in first (0s → 1.4s)
+    animation: fadeIn 1.4s ease forwards;
+    opacity: 0;
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(1) contrast(1.1) brightness(0.55);
+      user-select: none;
+      pointer-events: none;
+      display: block;
+    }
+  }
+
+  // dark gradient overlay
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 50%),
+      linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 30%);
+    pointer-events: none;
+  }
+
+  &__marquee {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 200px;
+    overflow: hidden;
+    pointer-events: none;
+
+    // text appears after photo (delay 1.2s)
+    opacity: 0;
+    animation: fadeIn 0.8s ease 1.2s forwards;
+
+    &-track {
+      display: flex;
+      white-space: nowrap;
+      // marquee scroll starts only after text is visible (delay 1.8s)
+      animation: marquee 18s linear 1.8s infinite;
+      will-change: transform;
+    }
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-size: clamp(88px, 18vw, 220px);
+    font-weight: 900;
+    line-height: 0.88;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    display: inline-block;
+  }
+
+  &__meta {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 24px 32px;
+    gap: 16px;
+
+    // meta slides up after everything (delay 1.6s)
+    opacity: 0;
+    animation: slideUp 0.8s ease 1.6s forwards;
+  }
+
+  &__location {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--white);
+    opacity: 0.55;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    text-align: right;
+
+    p {
+      font-family: var(--font-body);
+      font-size: clamp(16px, 3.5vw, 36px);
+      font-weight: 300;
+      line-height: 1.3;
+      color: var(--white);
+      letter-spacing: -0.01em;
+
+      @media (max-width: 640px) { font-size: 18px; }
+    }
+  }
+}
