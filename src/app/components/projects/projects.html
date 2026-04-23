@@ -1,0 +1,96 @@
+<section class="projects" id="projetos">
+
+  <!-- Header -->
+  <div class="projects__header">
+    <span class="projects__label">— TRABALHOS SELECIONADOS</span>
+
+    <nav class="projects__tabs">
+      @for (p of projects; track p.id; let i = $index) {
+        <button
+          class="projects__tab"
+          [ngClass]="{ active: active() === i }"
+          (click)="select(i)">
+          {{ p.label }}
+        </button>
+      }
+    </nav>
+
+    <a href="#projetos" class="projects__all">VER TODOS OS PROJETOS →</a>
+  </div>
+
+  <!-- Content -->
+  <div class="projects__content">
+
+    <!-- Mockups collage -->
+    <div class="projects__mockups">
+      <div class="projects__mockup projects__mockup--a" [style.--accent]="current.color">
+        <div class="projects__mockup-inner">
+          <div class="projects__mockup-bar"><span></span><span></span><span></span></div>
+          <div class="projects__mockup-ui">
+            <div class="ui-header"></div>
+            <div class="ui-row wide"></div>
+            <div class="ui-row"></div>
+            <div class="ui-row"></div>
+            <div class="ui-grid">
+              <div></div><div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+        <p class="projects__mockup-label">{{ current.mockups[0].title }}</p>
+      </div>
+
+      <div class="projects__mockup projects__mockup--b" [style.--accent]="current.color">
+        <div class="projects__mockup-inner">
+          <div class="projects__mockup-bar"><span></span><span></span><span></span></div>
+          <div class="projects__mockup-ui">
+            <div class="ui-title"></div>
+            <div class="ui-row"></div>
+            <div class="ui-row narrow"></div>
+            <div class="ui-table">
+              <div></div><div></div><div></div>
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+        <p class="projects__mockup-label">{{ current.mockups[1].title }}</p>
+      </div>
+
+      <div class="projects__mockup projects__mockup--c" [style.--accent]="current.color">
+        <div class="projects__mockup-inner">
+          <div class="projects__mockup-bar"><span></span><span></span><span></span></div>
+          <div class="projects__mockup-ui">
+            <div class="ui-title"></div>
+            <div class="ui-row wide"></div>
+            <div class="ui-chips">
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+        <p class="projects__mockup-label">{{ current.mockups[2].title }}</p>
+      </div>
+
+      <!-- VIEW overlay -->
+      <div class="projects__view-btn">VIEW</div>
+    </div>
+
+    <!-- Details -->
+    <div class="projects__details">
+      <p class="projects__period">{{ current.period }}</p>
+      <h3 class="projects__title">{{ current.title }}</h3>
+      <p class="projects__desc">{{ current.description }}</p>
+
+      <ul class="projects__bullets">
+        @for (b of current.bullets; track b) {
+          <li>{{ b }}</li>
+        }
+      </ul>
+
+      <div class="projects__tags">
+        @for (t of current.tags; track t) {
+          <span>{{ t }}</span>
+        }
+      </div>
+    </div>
+
+  </div>
+</section>
