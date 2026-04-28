@@ -3,6 +3,16 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes menuSlideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes menuSlideUp {
+  from { transform: translateY(0);     opacity: 1; }
+  to   { transform: translateY(-100%); opacity: 0; }
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -60,19 +70,23 @@
   position: fixed;
   inset: 0;
   z-index: 99;
-  background: rgba(0, 0, 0, 0.88);
-  backdrop-filter: blur(2px);
+  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 96px 28px 40px;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transform: translateY(-100%);
+  opacity: 0;
 
   &.active {
-    opacity: 1;
     pointer-events: all;
+    animation: menuSlideDown 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  &.closing {
+    pointer-events: none;
+    animation: menuSlideUp 0.34s cubic-bezier(0.55, 0, 0.45, 1) forwards;
   }
 
   &-links {

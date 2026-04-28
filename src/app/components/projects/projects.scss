@@ -61,16 +61,27 @@
   }
 
   &__all {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 99px;
     font-family: var(--font-body);
     font-size: 11px;
     letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.55);
     white-space: nowrap;
-    transition: color 0.2s;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: color 0.2s, border-color 0.2s;
 
-    &:hover { color: var(--white); }
+    &:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.4);
+    }
 
-    @media (max-width: 768px) { display: none; }
+    @media (max-width: 768px) {
+      display: inline-flex;
+      align-self: flex-start;
+    }
   }
 
   // ── Content grid ────────────────────────────────
@@ -326,4 +337,193 @@
       padding: 5px 10px;
     }
   }
+
+  // ── All Projects Overlay ─────────────────────────
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    animation: fadeIn 0.2s ease;
+  }
+
+  &__panel {
+    background: #111;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    width: min(720px, 100vw);
+    height: 100vh;
+    overflow-y: auto;
+    padding: 48px 48px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    animation: slideIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+
+    @media (max-width: 640px) {
+      padding: 32px 24px 64px;
+    }
+  }
+
+  &__panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__panel-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: #00c9a7;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  &__panel-title {
+    font-family: var(--font-body);
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  &__panel-close {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 50%;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.2s, border-color 0.2s;
+
+    &:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.4);
+    }
+  }
+
+  &__panel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    position: relative;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+
+    &:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    &--active {
+      border-color: var(--accent, #3b82f6);
+      background: rgba(255,255,255,0.05);
+    }
+  }
+
+  &__card-bar {
+    height: 3px;
+    background: var(--accent, #3b82f6);
+    width: 100%;
+  }
+
+  &__card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__card-period {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.04em;
+  }
+
+  &__card-name {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  &__card-desc {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.45);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+
+    span {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      padding: 3px 7px;
+    }
+  }
+
+  &__card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: var(--font-body);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--black);
+    background: var(--white);
+    border-radius: 3px;
+    padding: 3px 7px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }

@@ -5,17 +5,17 @@
     <span class="projects__label">— TRABALHOS SELECIONADOS</span>
 
     <nav class="projects__tabs">
-      @for (p of projects; track p.id; let i = $index) {
+      @for (p of featured; track p.id) {
         <button
           class="projects__tab"
-          [ngClass]="{ active: active() === i }"
-          (click)="select(i)">
+          [ngClass]="{ active: activeId() === p.id }"
+          (click)="select(p.id)">
           {{ p.label }}
         </button>
       }
     </nav>
 
-    <a href="#projetos" class="projects__all">VER TODOS OS PROJETOS →</a>
+    <button class="projects__all" (click)="openAll()">VER TODOS OS PROJETOS →</button>
   </div>
 
   <!-- Content -->
@@ -69,7 +69,6 @@
         <p class="projects__mockup-label">{{ current.mockups[2].title }}</p>
       </div>
 
-      <!-- VIEW overlay -->
       <div class="projects__view-btn">VIEW</div>
     </div>
 
@@ -93,4 +92,47 @@
     </div>
 
   </div>
+
+  <!-- All Projects Overlay -->
+  @if (showAll()) {
+    <div class="projects__overlay" (click)="closeAll()">
+      <div class="projects__panel" (click)="$event.stopPropagation()">
+
+        <div class="projects__panel-header">
+          <div>
+            <p class="projects__panel-label">— PORTFÓLIO</p>
+            <h2 class="projects__panel-title">Todos os projetos</h2>
+          </div>
+          <button class="projects__panel-close" (click)="closeAll()">✕</button>
+        </div>
+
+        <div class="projects__panel-grid">
+          @for (p of projects; track p.id) {
+            <button
+              class="projects__card"
+              [ngClass]="{ 'projects__card--active': activeId() === p.id }"
+              [style.--accent]="p.color"
+              (click)="select(p.id)">
+              <div class="projects__card-bar"></div>
+              <div class="projects__card-body">
+                <p class="projects__card-period">{{ p.period }}</p>
+                <h4 class="projects__card-name">{{ p.title }}</h4>
+                <p class="projects__card-desc">{{ p.description }}</p>
+                <div class="projects__card-tags">
+                  @for (t of p.tags; track t) {
+                    <span>{{ t }}</span>
+                  }
+                </div>
+              </div>
+              @if (activeId() === p.id) {
+                <div class="projects__card-badge">ATUAL</div>
+              }
+            </button>
+          }
+        </div>
+
+      </div>
+    </div>
+  }
+
 </section>

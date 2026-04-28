@@ -8,9 +8,18 @@ import { NgClass } from '@angular/common';
   styleUrl: './navbar.scss',
 })
 export class Navbar {
-  menuOpen = signal(false);
+  menuOpen    = signal(false);
+  menuClosing = signal(false);
 
   toggleMenu() {
-    this.menuOpen.update(v => !v);
+    if (this.menuOpen()) {
+      this.menuClosing.set(true);
+      setTimeout(() => {
+        this.menuOpen.set(false);
+        this.menuClosing.set(false);
+      }, 380);
+    } else {
+      this.menuOpen.set(true);
+    }
   }
 }

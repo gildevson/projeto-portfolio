@@ -1,0 +1,49 @@
+<section class="testimonials" id="depoimentos">
+
+  <span class="testimonials__label">— DEPOIMENTOS</span>
+
+  <!-- Background marquee text -->
+  <div class="testimonials__bg-text" aria-hidden="true">
+    <span>O que as pessoas falam sobre mim&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>O que as pessoas falam sobre mim&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  </div>
+
+  <!-- Card stage -->
+  <div class="testimonials__stage">
+    <div class="testimonials__card">
+      <div class="testimonials__quote-mark">"</div>
+      <p class="testimonials__text">{{ current.quote }}</p>
+      <div class="testimonials__author">
+        <strong class="testimonials__name">{{ current.name }}</strong>
+        <span class="testimonials__role">{{ current.role }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="testimonials__nav">
+    <button class="testimonials__btn" (click)="prev()" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+    </button>
+
+    <div class="testimonials__dots">
+      @for (t of testimonials; track $index) {
+        <button
+          class="testimonials__dot"
+          [class.active]="active() === $index"
+          (click)="active.set($index)"
+          [attr.aria-label]="'Depoimento ' + ($index + 1)">
+        </button>
+      }
+    </div>
+
+    <button class="testimonials__btn" (click)="next()" aria-label="Próximo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+</section>
