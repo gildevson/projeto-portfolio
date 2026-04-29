@@ -1,16 +1,16 @@
 <nav class="navbar">
-  <div class="navbar__brand">GILSON FONSECA</div>
+  <a class="navbar__brand" routerLink="/">GILSON FONSECA</a>
 
   <!-- Desktop links -->
   <ul class="navbar__links">
-    <li><a href="#servicos">SERVIÇOS</a></li>
-    <li><a href="#projetos">PROJETOS</a></li>
-    <li><a href="#sobre">SOBRE MIM</a></li>
-    <li><a href="#depoimentos">DEPOIMENTOS</a></li>
-    <li><a href="#contato">CONTATO</a></li>
+    <li><a (click)="scrollTo('servicos')">SERVIÇOS</a></li>
+    <li><a (click)="scrollTo('projetos')">PROJETOS</a></li>
+    <li><a (click)="scrollTo('sobre')">SOBRE MIM</a></li>
+    <li><a (click)="scrollTo('depoimentos')">DEPOIMENTOS</a></li>
+    <li><a (click)="scrollTo('contato')">CONTATO</a></li>
   </ul>
 
-  <!-- Mobile: X or hamburger -->
+  <!-- Mobile: hamburger / X -->
   <button class="navbar__burger" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
     @if (menuOpen()) {
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -29,11 +29,11 @@
 <!-- Mobile menu overlay -->
 <div class="navbar__mobile" [ngClass]="{ active: menuOpen(), closing: menuClosing() }">
   <ul class="navbar__mobile-links">
-    <li><a href="#servicos"    (click)="toggleMenu()">Serviços</a></li>
-    <li><a href="#projetos"    (click)="toggleMenu()">Projetos</a></li>
-    <li><a href="#sobre"       (click)="toggleMenu()">Sobre mim</a></li>
-    <li><a href="#depoimentos" (click)="toggleMenu()">Depoimentos</a></li>
-    <li><a href="#contato"     (click)="toggleMenu()">Contato</a></li>
+    <li><a (click)="scrollTo('servicos')">Serviços</a></li>
+    <li><a (click)="scrollTo('projetos')">Projetos</a></li>
+    <li><a (click)="scrollTo('sobre')">Sobre mim</a></li>
+    <li><a (click)="scrollTo('depoimentos')">Depoimentos</a></li>
+    <li><a (click)="scrollTo('contato')">Contato</a></li>
   </ul>
 
   <div class="navbar__mobile-footer">

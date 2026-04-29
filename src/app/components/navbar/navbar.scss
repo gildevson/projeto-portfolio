@@ -43,6 +43,7 @@
     li a {
       font-family: var(--font-body);
       font-size: 11px;
+      cursor: pointer;
       font-weight: 400;
       letter-spacing: 0.1em;
       color: var(--white);
@@ -102,6 +103,7 @@
       line-height: 1.15;
       color: var(--white);
       display: block;
+      cursor: pointer;
       transition: opacity 0.2s;
 
       &:hover { opacity: 0.6; }
