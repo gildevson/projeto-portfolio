@@ -57,15 +57,18 @@
   // ── Carrossel ─────────────────────────────────
   &__marquee {
     position: absolute;
-    top: 50%;
+    bottom: 150px;
     left: 0;
     right: 0;
-    transform: translateY(-50%);
     z-index: 3;
     overflow: hidden;
     pointer-events: none;
     opacity: 0;
     animation: fadeIn 0.8s ease 1.2s forwards;
+
+    @media (max-width: 640px) {
+      bottom: 115px;
+    }
   }
 
   &__marquee-track {

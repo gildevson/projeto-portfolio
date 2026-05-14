@@ -5,84 +5,70 @@
   <!-- Abas -->
   <div class="privacy__tabs">
     <button class="privacy__tab" [ngClass]="{ active: activeTab() === 'privacidade' }" (click)="activeTab.set('privacidade')">
-      POLÍTICA DE PRIVACIDADE
+      Política de Privacidade
     </button>
     <button class="privacy__tab" [ngClass]="{ active: activeTab() === 'cookies' }" (click)="activeTab.set('cookies')">
-      POLÍTICA DE COOKIES
+      Política de Cookies
     </button>
   </div>
 
   <!-- Política de Privacidade -->
   @if (activeTab() === 'privacidade') {
-    <div class="privacy__content">
+    <div class="privacy__body">
       <h1 class="privacy__title">Política de Privacidade</h1>
-      <p class="privacy__date">Última atualização: abril de 2025</p>
+      <p class="privacy__updated">Última atualização: abril de 2025</p>
 
       <p class="privacy__intro">
-        Nós, de Gilson Fonseca, dedicamo-nos a servir nossos clientes e contatos da melhor
-        maneira possível. Parte desse compromisso envolve a gestão responsável das informações
-        pessoais coletadas por meio de nossos sistemas, aplicações e interações digitais.
+        Este portfólio é mantido por Gilson Fonseca, desenvolvedor de software. Esta política
+        descreve como as informações dos visitantes são tratadas ao navegar por este site.
+        O respeito à sua privacidade é levado a sério.
       </p>
 
-      <h2 class="privacy__section-title">1. Objetivos do tratamento de dados</h2>
-      <ul class="privacy__list">
-        <li>Aprimorar a experiência do usuário em nossas plataformas, compreendendo as necessidades e preferências dos clientes;</li>
-        <li>Fornecer suporte ágil e responder a dúvidas ou solicitações de serviço;</li>
-        <li>Evoluir continuamente nossos produtos e soluções, acompanhando as demandas do mercado;</li>
-        <li>Executar operações necessárias, como gestão de contas e processos internos.</li>
-      </ul>
-
-      <h2 class="privacy__section-title">2. Âmbito e aplicação</h2>
+      <h2>1. Finalidade do site</h2>
       <p>
-        Esta política de privacidade se aplica a todos os públicos que interagem com os
-        serviços de Gilson Fonseca, incluindo visitantes, usuários e clientes. Independentemente
-        da forma de interação, garantimos que os dados pessoais sejam tratados com alto nível
-        de proteção e segurança.
+        Este é um portfólio pessoal com o objetivo de apresentar meu trabalho, experiências
+        e habilidades profissionais. Não há venda de produtos, cadastros obrigatórios
+        ou coleta ativa de dados pessoais identificáveis.
       </p>
 
-      <h2 class="privacy__section-title">3. Coleta e processamento de dados</h2>
-      <p>Coletamos informações pessoais por meio de interações diretas ou indiretas. Os dados podem incluir:</p>
+      <h2>2. Dados coletados automaticamente</h2>
+      <p>Ao visitar o site, alguns dados podem ser coletados automaticamente pelos serviços de hospedagem, incluindo:</p>
       <ul class="privacy__list">
         <li>Endereço IP</li>
-        <li>Informações de navegador e idioma</li>
-        <li>Sistema operacional e versão</li>
+        <li>Tipo de navegador e idioma</li>
+        <li>Sistema operacional</li>
         <li>Localização aproximada baseada em IP</li>
-        <li>Registros de interação (cliques, tempo de navegação, etc.)</li>
+        <li>Páginas visitadas e tempo de navegação</li>
       </ul>
+      <p>Essas informações são usadas exclusivamente para fins técnicos e estatísticos.</p>
 
-      <h2 class="privacy__section-title">4. Uso das informações</h2>
-      <p>Os dados coletados são utilizados para:</p>
-      <ul class="privacy__list">
-        <li>Cumprimento de obrigações legais</li>
-        <li>Análises e melhoria de desempenho dos sistemas</li>
-        <li>Otimização dos serviços prestados</li>
-      </ul>
-
-      <h2 class="privacy__section-title">5. Armazenamento e proteção</h2>
+      <h2>3. Contato por e-mail</h2>
       <p>
-        As informações são armazenadas em ambientes seguros, com uso de boas práticas de
-        segurança e provedores confiáveis. Quando há compartilhamento com terceiros,
-        garantimos contratos que asseguram a proteção dos dados conforme a legislação vigente.
+        Ao entrar em contato via e-mail, as informações fornecidas (nome, e-mail e mensagem)
+        serão utilizadas somente para responder à sua solicitação. Esses dados não são
+        compartilhados com terceiros nem utilizados para fins de marketing.
       </p>
 
-      <h2 class="privacy__section-title">6. Direitos do usuário</h2>
-      <p>Você possui direitos garantidos pela legislação de proteção de dados, incluindo:</p>
+      <h2>4. Compartilhamento de dados</h2>
+      <p>
+        Nenhuma informação pessoal é vendida, alugada ou compartilhada com terceiros.
+        Eventuais serviços externos utilizados (como hospedagem) possuem suas próprias
+        políticas de privacidade e seguem padrões adequados de proteção de dados.
+      </p>
+
+      <h2>5. Seus direitos (LGPD)</h2>
+      <p>Em conformidade com a Lei Geral de Proteção de Dados (LGPD), você tem direito a:</p>
       <ul class="privacy__list">
-        <li>Acesso aos seus dados</li>
-        <li>Correção de informações</li>
-        <li>Exclusão de dados</li>
-        <li>Portabilidade</li>
-        <li>Oposição ao tratamento</li>
-        <li>Revogação de consentimento</li>
+        <li>Saber quais dados foram coletados</li>
+        <li>Solicitar a correção ou exclusão dos seus dados</li>
+        <li>Revogar consentimento a qualquer momento</li>
+        <li>Opor-se ao tratamento de dados</li>
       </ul>
 
-      <h2 class="privacy__section-title">7. Serviços de terceiros</h2>
-      <p>Podemos utilizar serviços externos como ferramentas de análise, hospedagem e plataformas de comunicação. Todos seguem padrões adequados de proteção de dados.</p>
-
-      <h2 class="privacy__section-title">8. Comunicação</h2>
+      <h2>6. Alterações nesta política</h2>
       <p>
-        As informações enviadas por e-mail ou formulários serão utilizadas exclusivamente
-        para atendimento e comunicação profissional, podendo ser armazenadas para fins administrativos.
+        Esta política pode ser atualizada periodicamente. Quaisquer mudanças significativas
+        serão refletidas nesta página com a data de atualização revisada.
       </p>
 
       <div class="privacy__contact">
@@ -94,30 +80,30 @@
 
   <!-- Política de Cookies -->
   @if (activeTab() === 'cookies') {
-    <div class="privacy__content">
+    <div class="privacy__body">
       <h1 class="privacy__title">Política de Cookies</h1>
-      <p class="privacy__date">Última atualização: abril de 2025</p>
+      <p class="privacy__updated">Última atualização: abril de 2025</p>
 
-      <h2 class="privacy__section-title">1. O que são cookies?</h2>
+      <h2>1. O que são cookies?</h2>
       <p>
         Os cookies são pequenos arquivos de texto armazenados no seu dispositivo quando você
         visita um site. São utilizados para fazer com que os sites funcionem de forma mais
         eficiente e para fornecer informações aos proprietários do site.
       </p>
 
-      <h2 class="privacy__section-title">2. Como usamos os cookies</h2>
+      <h2>2. Como usamos os cookies</h2>
       <p>Este site pode utilizar cookies para melhorar a experiência do usuário. Classificamos os cookies nas seguintes categorias:</p>
 
-      <h3 class="privacy__sub-title">Cookies necessários</h3>
+      <h3>Cookies necessários</h3>
       <p>Essenciais para o funcionamento do site. Sem eles, partes do site não funcionariam corretamente.</p>
 
-      <h3 class="privacy__sub-title">Cookies de análise</h3>
+      <h3>Cookies de análise</h3>
       <p>Permitem reconhecer e contar os visitantes do site para melhorar o desempenho e a experiência de navegação.</p>
 
-      <h3 class="privacy__sub-title">Cookies funcionais</h3>
+      <h3>Cookies funcionais</h3>
       <p>Usados para reconhecer você quando retorna ao site e personalizar o conteúdo conforme suas preferências.</p>
 
-      <h2 class="privacy__section-title">3. Gerenciamento de cookies</h2>
+      <h2>3. Gerenciamento de cookies</h2>
       <p>
         Você pode controlar e/ou excluir cookies a qualquer momento pelas configurações
         do seu navegador. A desativação de cookies pode afetar a funcionalidade do site.

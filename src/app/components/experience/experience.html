@@ -1,0 +1,39 @@
+<section class="experience" id="experiencia">
+
+  <span class="experience__label reveal" #animated>— ONDE TRABALHEI</span>
+
+  <h2 class="experience__heading reveal" #animated>
+    Experiência <em>profissional</em>
+  </h2>
+
+  <div class="experience__list">
+    @for (job of jobs; track job.company; let i = $index) {
+      <div class="experience__item reveal" #animated>
+        <div class="experience__left">
+          <span class="experience__period">{{ job.period }}</span>
+        </div>
+        <div class="experience__divider">
+          <span class="experience__dot"></span>
+          <span class="experience__line"></span>
+        </div>
+        <div class="experience__right">
+          <span class="experience__period-mobile">{{ job.period }}</span>
+          <div class="experience__header">
+            <div>
+              <h3 class="experience__role">{{ job.role }}</h3>
+              <span class="experience__company">{{ job.company }}</span>
+            </div>
+            <img class="experience__logo" [src]="job.logo" [alt]="job.company" />
+          </div>
+          <p class="experience__desc">{{ job.description }}</p>
+          <div class="experience__tags">
+            @for (tag of job.tags; track tag) {
+              <span>{{ tag }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+</section>
