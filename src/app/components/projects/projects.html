@@ -1,8 +1,7 @@
 <section class="projects" id="projetos">
 
-  <!-- Header -->
   <div class="projects__header">
-    <span class="projects__label">— TRABALHOS SELECIONADOS</span>
+    <span class="projects__label">{{ 'proj.label' | translate }}</span>
 
     <nav class="projects__tabs">
       @for (p of featured; track p.id) {
@@ -15,13 +14,11 @@
       }
     </nav>
 
-    <button class="projects__all" (click)="openAll()">VER TODOS OS PROJETOS →</button>
+    <button class="projects__all" (click)="openAll()">{{ 'proj.all' | translate }}</button>
   </div>
 
-  <!-- Content -->
   <div class="projects__content">
 
-    <!-- Mockups collage -->
     <div class="projects__mockups">
       <div class="projects__mockup projects__mockup--a" [style.--accent]="current.color">
         <div class="projects__mockup-inner">
@@ -30,10 +27,7 @@
             <div class="ui-header"></div>
             <div class="ui-row wide"></div>
             <div class="ui-row"></div>
-            <div class="ui-row"></div>
-            <div class="ui-grid">
-              <div></div><div></div><div></div><div></div>
-            </div>
+            <div class="ui-grid"><div></div><div></div><div></div><div></div></div>
           </div>
         </div>
         <p class="projects__mockup-label">{{ current.mockups[0].title }}</p>
@@ -46,10 +40,7 @@
             <div class="ui-title"></div>
             <div class="ui-row"></div>
             <div class="ui-row narrow"></div>
-            <div class="ui-table">
-              <div></div><div></div><div></div>
-              <div></div><div></div><div></div>
-            </div>
+            <div class="ui-table"><div></div><div></div><div></div><div></div><div></div><div></div></div>
           </div>
         </div>
         <p class="projects__mockup-label">{{ current.mockups[1].title }}</p>
@@ -61,9 +52,7 @@
           <div class="projects__mockup-ui">
             <div class="ui-title"></div>
             <div class="ui-row wide"></div>
-            <div class="ui-chips">
-              <div></div><div></div><div></div>
-            </div>
+            <div class="ui-chips"><div></div><div></div><div></div></div>
           </div>
         </div>
         <p class="projects__mockup-label">{{ current.mockups[2].title }}</p>
@@ -72,36 +61,37 @@
       <div class="projects__view-btn">VIEW</div>
     </div>
 
-    <!-- Details -->
     <div class="projects__details">
       <p class="projects__period">{{ current.period }}</p>
-      <h3 class="projects__title">{{ current.title }}</h3>
-      <p class="projects__desc">{{ current.description }}</p>
+      <h3 class="projects__title">{{ current.title[lang()] }}</h3>
+      <p class="projects__desc">{{ current.description[lang()] }}</p>
 
       <ul class="projects__bullets">
-        @for (b of current.bullets; track b) {
-          <li>{{ b }}</li>
+        @for (b of current.bullets; track b.pt) {
+          <li>{{ b[lang()] }}</li>
         }
       </ul>
 
       <div class="projects__tags">
         @for (t of current.tags; track t) {
-          <span>{{ t }}</span>
+          <span>
+            @if (getTagIcon(t)) { <i [class]="getTagIcon(t)"></i> }
+            {{ t }}
+          </span>
         }
       </div>
     </div>
 
   </div>
 
-  <!-- All Projects Overlay -->
   @if (showAll()) {
     <div class="projects__overlay" (click)="closeAll()">
       <div class="projects__panel" (click)="$event.stopPropagation()">
 
         <div class="projects__panel-header">
           <div>
-            <p class="projects__panel-label">— PORTFÓLIO</p>
-            <h2 class="projects__panel-title">Todos os projetos</h2>
+            <p class="projects__panel-label">{{ 'proj.panel.label' | translate }}</p>
+            <h2 class="projects__panel-title">{{ 'proj.panel.title' | translate }}</h2>
           </div>
           <button class="projects__panel-close" (click)="closeAll()">✕</button>
         </div>
@@ -116,16 +106,19 @@
               <div class="projects__card-bar"></div>
               <div class="projects__card-body">
                 <p class="projects__card-period">{{ p.period }}</p>
-                <h4 class="projects__card-name">{{ p.title }}</h4>
-                <p class="projects__card-desc">{{ p.description }}</p>
+                <h4 class="projects__card-name">{{ p.title[lang()] }}</h4>
+                <p class="projects__card-desc">{{ p.description[lang()] }}</p>
                 <div class="projects__card-tags">
                   @for (t of p.tags; track t) {
-                    <span>{{ t }}</span>
+                    <span>
+                      @if (getTagIcon(t)) { <i [class]="getTagIcon(t)"></i> }
+                      {{ t }}
+                    </span>
                   }
                 </div>
               </div>
               @if (activeId() === p.id) {
-                <div class="projects__card-badge">ATUAL</div>
+                <div class="projects__card-badge">{{ 'proj.badge' | translate }}</div>
               }
             </button>
           }

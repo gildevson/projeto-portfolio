@@ -1,16 +1,32 @@
 <nav class="navbar">
   <a class="navbar__brand" (click)="goHome()">GILSON FONSECA</a>
 
-  <!-- Desktop links -->
-  <ul class="navbar__links">
-    <li><a (click)="scrollTo('servicos')">SERVIÇOS</a></li>
-    <li><a (click)="scrollTo('projetos')">PROJETOS</a></li>
-    <li><a (click)="scrollTo('sobre')">SOBRE MIM</a></li>
-    <li><a (click)="scrollTo('depoimentos')">DEPOIMENTOS</a></li>
-    <li><a (click)="scrollTo('contato')">CONTATO</a></li>
-  </ul>
+  <!-- Desktop: links + separador + idioma agrupados -->
+  <div class="navbar__right">
+    <ul class="navbar__links">
+      <li><a (click)="scrollTo('servicos')">{{ 'nav.services' | translate }}</a></li>
+      <li><a (click)="scrollTo('projetos')">{{ 'nav.projects' | translate }}</a></li>
+      <li><a (click)="scrollTo('sobre')">{{ 'nav.about' | translate }}</a></li>
+      <li><a (click)="scrollTo('depoimentos')">{{ 'nav.testimonials' | translate }}</a></li>
+      <li><a (click)="scrollTo('contato')">{{ 'nav.contact' | translate }}</a></li>
+    </ul>
 
-  <!-- Mobile: hamburger / X -->
+    <span class="navbar__divider"></span>
+
+    <div class="navbar__lang">
+      <button
+        class="navbar__lang-btn"
+        [class.active]="currentLang() === 'pt'"
+        (click)="setLang('pt')">PT</button>
+      <span class="navbar__lang-sep">/</span>
+      <button
+        class="navbar__lang-btn"
+        [class.active]="currentLang() === 'en'"
+        (click)="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <!-- Mobile: hamburger -->
   <button class="navbar__burger" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()">
     @if (menuOpen()) {
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -29,15 +45,26 @@
 <!-- Mobile menu overlay -->
 <div class="navbar__mobile" [ngClass]="{ active: menuOpen(), closing: menuClosing() }">
   <ul class="navbar__mobile-links">
-    <li><a (click)="scrollTo('servicos')">Serviços</a></li>
-    <li><a (click)="scrollTo('projetos')">Projetos</a></li>
-    <li><a (click)="scrollTo('sobre')">Sobre mim</a></li>
-    <li><a (click)="scrollTo('depoimentos')">Depoimentos</a></li>
-    <li><a (click)="scrollTo('contato')">Contato</a></li>
+    <li><a (click)="scrollTo('servicos')">{{ 'nav.services' | translate }}</a></li>
+    <li><a (click)="scrollTo('projetos')">{{ 'nav.projects' | translate }}</a></li>
+    <li><a (click)="scrollTo('sobre')">{{ 'nav.about' | translate }}</a></li>
+    <li><a (click)="scrollTo('depoimentos')">{{ 'nav.testimonials' | translate }}</a></li>
+    <li><a (click)="scrollTo('contato')">{{ 'nav.contact' | translate }}</a></li>
   </ul>
 
   <div class="navbar__mobile-footer">
-    <p class="navbar__mobile-location">LOCALIZADO EM BRASIL</p>
-    <div class="navbar__mobile-role">DESENVOLVEDOR FULL STACK · ENGENHARIA DE SOFTWARE</div>
+    <div class="navbar__mobile-lang">
+      <button
+        class="navbar__lang-btn"
+        [class.active]="currentLang() === 'pt'"
+        (click)="setLang('pt')">PT</button>
+      <span class="navbar__lang-sep">/</span>
+      <button
+        class="navbar__lang-btn"
+        [class.active]="currentLang() === 'en'"
+        (click)="setLang('en')">EN</button>
+    </div>
+    <p class="navbar__mobile-location">{{ 'hero.location' | translate }}</p>
+    <div class="navbar__mobile-role">{{ 'hero.role' | translate }} · {{ 'hero.area' | translate }}</div>
   </div>
 </div>

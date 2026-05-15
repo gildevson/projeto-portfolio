@@ -1,9 +1,9 @@
 <section class="experience" id="experiencia">
 
-  <span class="experience__label reveal" #animated>— ONDE TRABALHEI</span>
+  <span class="experience__label reveal" #animated>{{ 'exp.label' | translate }}</span>
 
   <h2 class="experience__heading reveal" #animated>
-    Experiência <em>profissional</em>
+    {{ 'exp.heading' | translate }} <em>{{ 'exp.heading.em' | translate }}</em>
   </h2>
 
   <div class="experience__list">
@@ -20,12 +20,12 @@
           <span class="experience__period-mobile">{{ job.period }}</span>
           <div class="experience__header">
             <div>
-              <h3 class="experience__role">{{ job.role }}</h3>
+              <h3 class="experience__role">{{ job.role[lang()] }}</h3>
               <span class="experience__company">{{ job.company }}</span>
             </div>
             <img class="experience__logo" [src]="job.logo" [alt]="job.company" />
           </div>
-          <p class="experience__desc">{{ job.description }}</p>
+          <p class="experience__desc">{{ job.description[lang()] }}</p>
           <div class="experience__tags">
             @for (tag of job.tags; track tag) {
               <span>{{ tag }}</span>

@@ -327,6 +327,9 @@
     border-top: 1px solid rgba(255,255,255,0.08);
 
     span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       font-family: var(--font-body);
       font-size: 10px;
       font-weight: 500;
@@ -335,6 +338,11 @@
       border: 1px solid rgba(255,255,255,0.14);
       border-radius: 4px;
       padding: 5px 10px;
+
+      i {
+        font-size: 12px;
+        line-height: 1;
+      }
     }
   }
 
@@ -492,6 +500,9 @@
     border-top: 1px solid rgba(255,255,255,0.06);
 
     span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       font-family: var(--font-body);
       font-size: 9px;
       font-weight: 500;
@@ -500,6 +511,11 @@
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 3px;
       padding: 3px 7px;
+
+      i {
+        font-size: 11px;
+        line-height: 1;
+      }
     }
   }
 

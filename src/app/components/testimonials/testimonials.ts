@@ -1,4 +1,6 @@
 import { Component, signal } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Testimonial {
   quote: string;
@@ -9,12 +11,14 @@ interface Testimonial {
 
 @Component({
   selector: 'app-testimonials',
-  imports: [],
+  imports: [NgClass, TranslatePipe],
   templateUrl: './testimonials.html',
   styleUrl: './testimonials.scss',
 })
 export class Testimonials {
-  active = signal(0);
+  active    = signal(0);
+  animState = signal<'idle' | 'exit' | 'enter'>('idle');
+  direction = signal<'left' | 'right'>('right');
 
   testimonials: Testimonial[] = [
     {
@@ -64,11 +68,31 @@ export class Testimonials {
     return this.testimonials[this.active()];
   }
 
-  prev() {
-    this.active.update(i => (i - 1 + this.testimonials.length) % this.testimonials.length);
+  navigate(dir: 'prev' | 'next') {
+    if (this.animState() !== 'idle') return;
+
+    this.direction.set(dir === 'next' ? 'right' : 'left');
+    this.animState.set('exit');
+
+    setTimeout(() => {
+      if (dir === 'next') {
+        this.active.update(i => (i + 1) % this.testimonials.length);
+      } else {
+        this.active.update(i => (i - 1 + this.testimonials.length) % this.testimonials.length);
+      }
+      this.animState.set('enter');
+      setTimeout(() => this.animState.set('idle'), 380);
+    }, 280);
   }
 
-  next() {
-    this.active.update(i => (i + 1) % this.testimonials.length);
+  goTo(index: number) {
+    if (this.animState() !== 'idle' || index === this.active()) return;
+    this.direction.set(index > this.active() ? 'right' : 'left');
+    this.animState.set('exit');
+    setTimeout(() => {
+      this.active.set(index);
+      this.animState.set('enter');
+      setTimeout(() => this.animState.set('idle'), 380);
+    }, 280);
   }
 }

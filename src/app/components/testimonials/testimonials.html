@@ -1,16 +1,21 @@
 <section class="testimonials" id="depoimentos">
 
-  <span class="testimonials__label">— DEPOIMENTOS</span>
+  <span class="testimonials__label">{{ 'test.label' | translate }}</span>
 
-  <!-- Background marquee text -->
   <div class="testimonials__bg-text" aria-hidden="true">
-    <span>O que as pessoas falam sobre mim&nbsp;&nbsp;&nbsp;&nbsp;</span>
-    <span>O que as pessoas falam sobre mim&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>{{ 'test.bg' | translate }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>{{ 'test.bg' | translate }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
   </div>
 
-  <!-- Card stage -->
   <div class="testimonials__stage">
-    <div class="testimonials__card">
+    <div
+      class="testimonials__card"
+      [ngClass]="{
+        'exit-left':  animState() === 'exit'  && direction() === 'left',
+        'exit-right': animState() === 'exit'  && direction() === 'right',
+        'enter-left': animState() === 'enter' && direction() === 'left',
+        'enter-right':animState() === 'enter' && direction() === 'right'
+      }">
       <div class="testimonials__quote-mark">"</div>
       <p class="testimonials__text">{{ current.quote }}</p>
       <div class="testimonials__author">
@@ -27,9 +32,8 @@
     </div>
   </div>
 
-  <!-- Navigation -->
   <div class="testimonials__nav">
-    <button class="testimonials__btn" (click)="prev()" aria-label="Anterior">
+    <button class="testimonials__btn" (click)="navigate('prev')" [attr.aria-label]="'test.prev' | translate">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M19 12H5M12 5l-7 7 7 7"/>
       </svg>
@@ -40,13 +44,13 @@
         <button
           class="testimonials__dot"
           [class.active]="active() === $index"
-          (click)="active.set($index)"
-          [attr.aria-label]="'Depoimento ' + ($index + 1)">
+          (click)="goTo($index)"
+          [attr.aria-label]="('test.dot' | translate) + ' ' + ($index + 1)">
         </button>
       }
     </div>
 
-    <button class="testimonials__btn" (click)="next()" aria-label="Próximo">
+    <button class="testimonials__btn" (click)="navigate('next')" [attr.aria-label]="'test.next' | translate">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M5 12h14M12 5l7 7-7 7"/>
       </svg>

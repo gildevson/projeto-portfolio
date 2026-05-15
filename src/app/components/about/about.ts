@@ -2,12 +2,12 @@ import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
-  selector: 'app-welcome',
+  selector: 'app-about',
   imports: [TranslatePipe],
-  templateUrl: './welcome.html',
-  styleUrl: './welcome.scss',
+  templateUrl: './about.html',
+  styleUrl: './about.scss',
 })
-export class Welcome {
+export class About {
   @ViewChildren('animated') items!: QueryList<ElementRef>;
 
   ngAfterViewInit() {
@@ -20,7 +20,7 @@ export class Welcome {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
     this.items.forEach(el => observer.observe(el.nativeElement));
   }

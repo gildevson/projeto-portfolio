@@ -70,13 +70,19 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 
-  &:hover { transform: rotate(0deg) scale(1.01); }
+  &:hover:not(.exit-left):not(.exit-right):not(.enter-left):not(.enter-right) {
+    transform: rotate(0deg) scale(1.01);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &.exit-right  { animation: card-exit-right  0.28s ease-in  forwards; }
+  &.exit-left   { animation: card-exit-left   0.28s ease-in  forwards; }
+  &.enter-right { animation: card-enter-right 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  &.enter-left  { animation: card-enter-left  0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
   @media (max-width: 640px) {
     padding: 32px 28px;
-    transform: rotate(-1deg);
   }
 }
 
@@ -212,4 +218,25 @@
 @keyframes marquee {
   from { transform: translateY(-50%) translateX(0); }
   to   { transform: translateY(-50%) translateX(-50%); }
+}
+
+// ── Card carousel animations ──────────────────────
+@keyframes card-exit-right {
+  from { transform: rotate(-1.5deg) translateX(0)     scale(1);   opacity: 1; }
+  to   { transform: rotate(6deg)    translateX(130%)  scale(0.88); opacity: 0; }
+}
+
+@keyframes card-exit-left {
+  from { transform: rotate(-1.5deg) translateX(0)     scale(1);   opacity: 1; }
+  to   { transform: rotate(-6deg)   translateX(-130%) scale(0.88); opacity: 0; }
+}
+
+@keyframes card-enter-right {
+  from { transform: rotate(-6deg)   translateX(-130%) scale(0.88); opacity: 0; }
+  to   { transform: rotate(-1.5deg) translateX(0)     scale(1);   opacity: 1; }
+}
+
+@keyframes card-enter-left {
+  from { transform: rotate(6deg)    translateX(130%)  scale(0.88); opacity: 0; }
+  to   { transform: rotate(-1.5deg) translateX(0)     scale(1);   opacity: 1; }
 }

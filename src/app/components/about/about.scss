@@ -1,0 +1,149 @@
+.about {
+  background: var(--black);
+  padding: 80px 80px 100px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+  @media (max-width: 640px) {
+    padding: 56px 28px 72px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 80px;
+    align-items: start;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+  }
+
+  // ── Left: narrative ────────────────────────────
+  &__label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    color: #00c9a7;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  &__heading {
+    font-family: var(--font-body);
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 36px;
+  }
+
+  &__text {
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.2vw, 16px);
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 20px;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  // ── Right: cards ────────────────────────────────
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 4px;
+  }
+
+  &__stat {
+    border: 1px solid rgba(0, 201, 167, 0.25);
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+    background: rgba(0, 201, 167, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &-value {
+      font-family: var(--font-body);
+      font-size: 56px;
+      font-weight: 700;
+      color: #00c9a7;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    &-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.02em;
+    }
+  }
+
+  &__card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s, background 0.2s;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &-tag {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: #00c9a7;
+      text-transform: uppercase;
+    }
+
+    &-title {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    &-sub {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.35);
+    }
+  }
+}
+
+// ── reveal animation ─────────────────────────────
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:nth-child(1) { transition-delay: 0s;    }
+  &:nth-child(2) { transition-delay: 0.1s;  }
+  &:nth-child(3) { transition-delay: 0.2s;  }
+  &:nth-child(4) { transition-delay: 0.3s;  }
+  &:nth-child(5) { transition-delay: 0.4s;  }
+  &:nth-child(6) { transition-delay: 0.5s;  }
+  &:nth-child(7) { transition-delay: 0.6s;  }
+}

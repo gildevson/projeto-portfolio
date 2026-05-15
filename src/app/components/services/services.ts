@@ -1,8 +1,9 @@
 import { Component, ElementRef, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-services',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './services.html',
   styleUrl: './services.scss',
 })

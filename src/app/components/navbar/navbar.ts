@@ -1,18 +1,27 @@
 import { Component, signal, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { LanguageService } from '../../services/language.service';
+import { Lang } from '../../i18n/translations';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-navbar',
-  imports: [NgClass],
+  imports: [NgClass, TranslatePipe],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
 export class Navbar {
   private router = inject(Router);
+  private langService = inject(LanguageService);
 
   menuOpen    = signal(false);
   menuClosing = signal(false);
+  currentLang = this.langService.lang;
+
+  setLang(lang: Lang) {
+    this.langService.toggle(lang);
+  }
 
   toggleMenu() {
     if (this.menuOpen()) {

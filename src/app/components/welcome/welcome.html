@@ -1,29 +1,13 @@
 <section class="welcome" id="sobre">
-  <span class="welcome__label reveal" #animated>— BEM-VINDO</span>
+  <span class="welcome__label reveal" #animated>{{ 'welcome.label' | translate }}</span>
 
   <h1 class="welcome__heading">
-    <span class="reveal" #animated>Olá, eu sou o Gilson</span><br>
-    <span class="reveal" #animated>Desenvolvo <em>soluções</em> para</span><br>
-    <span class="reveal" #animated>problemas complexos</span>
+    <span class="reveal" #animated>{{ 'welcome.line1' | translate }}</span><br>
+    <span class="reveal" #animated>{{ 'welcome.line2' | translate }} <em>{{ 'welcome.highlight' | translate }}</em> {{ 'welcome.line2b' | translate }}</span><br>
+    <span class="reveal" #animated>{{ 'welcome.line3' | translate }}</span>
   </h1>
 
   <div class="welcome__body">
-    <p class="reveal" #animated>
-      Atuo no desenvolvimento backend e frontend, criando aplicações modernas, escaláveis
-      e de alta performance com C#, .NET, WPF, Node.js, React e Angular.
-    </p>
-    <p class="reveal" #animated>
-      Experiência com PostgreSQL, SQL Server, APIs RESTful, autenticação, relatórios
-      (Crystal Reports e RDLC) e sistemas financeiros corporativos.
-    </p>
-    <p class="reveal" #animated>
-      Também possuo experiência como Analista de Sistemas e Suporte Help Desk, atuando
-      com atendimento técnico, instalação e configuração de servidores e sistemas,
-      além da criação de relatórios conforme as regras de negócio dos clientes.
-    </p>
-    <p class="reveal" #animated>
-      Sou formado em Análise e Desenvolvimento de Sistemas e atualmente cursando
-      pós-graduação em Engenharia de Software na PUC.
-    </p>
+    <p class="reveal" #animated>{{ 'welcome.p' | translate }}</p>
   </div>
 </section>
