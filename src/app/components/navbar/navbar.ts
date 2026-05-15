@@ -30,11 +30,14 @@ export class Navbar {
     const url = this.router.url;
     const isHome = url === '/' || url === '' || url.startsWith('/#');
     if (isHome) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      this.router.navigate(['/']).then(() => {
+      const el = document.getElementById('topo');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+      }
+    } else {
+      this.router.navigate(['/'], { fragment: 'topo' });
     }
   }
 

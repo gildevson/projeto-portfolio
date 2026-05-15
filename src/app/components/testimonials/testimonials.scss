@@ -99,10 +99,41 @@
 
 .testimonials__author {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 14px;
   padding-top: 20px;
   border-top: 1px solid rgba(255,255,255,0.1);
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.testimonials__photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.testimonials__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0,201,167,0.15);
+  border: 2px solid rgba(0,201,167,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  color: #00c9a7;
+  flex-shrink: 0;
 }
 
 .testimonials__name {

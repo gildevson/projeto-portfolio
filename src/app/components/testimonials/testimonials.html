@@ -14,8 +14,15 @@
       <div class="testimonials__quote-mark">"</div>
       <p class="testimonials__text">{{ current.quote }}</p>
       <div class="testimonials__author">
-        <strong class="testimonials__name">{{ current.name }}</strong>
-        <span class="testimonials__role">{{ current.role }}</span>
+        @if (current.photo) {
+          <img class="testimonials__photo" [src]="current.photo" [alt]="current.name" />
+        } @else {
+          <div class="testimonials__avatar">{{ current.name.charAt(0) }}</div>
+        }
+        <div>
+          <strong class="testimonials__name">{{ current.name }}</strong>
+          <span class="testimonials__role">{{ current.role }}</span>
+        </div>
       </div>
     </div>
   </div>
