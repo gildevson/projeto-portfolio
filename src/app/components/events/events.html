@@ -1,0 +1,122 @@
+<section class="events" id="eventos">
+
+  <div class="events__header">
+    <span class="events__label">{{ 'events.label' | translate }}</span>
+    <h2 class="events__heading">{{ 'events.heading' | translate }}</h2>
+  </div>
+
+  @for (ev of events; track ev.name) {
+    <div class="events__card">
+
+      <div class="events__left">
+        <div class="events__meta">
+          <span class="events__tag">{{ 'events.tag' | translate }}</span>
+          <h3 class="events__title">{{ ev.name }}</h3>
+          <p class="events__location">📍 {{ ev.location }}</p>
+          <p class="events__date">{{ ev.date }}</p>
+        </div>
+
+        @if (ev.sponsors && ev.sponsors.length) {
+          <div class="events__sponsors">
+            <p class="events__section-label">{{ 'events.sponsors' | translate }}</p>
+            <div class="events__sponsors-list">
+              @for (s of ev.sponsors; track s) {
+                <span class="events__sponsor-tag">{{ s }}</span>
+              }
+            </div>
+          </div>
+        }
+
+        <div class="events__speakers">
+          <p class="events__section-label">{{ 'events.speakers' | translate }}</p>
+          <ul>
+            @for (sp of ev.speakers; track sp.name) {
+              <li>
+                <span class="events__speaker-name">{{ sp.name }}</span>
+                @if (sp.topic) {
+                  <span class="events__speaker-topic">{{ sp.topic[lang()] }}</span>
+                }
+              </li>
+            }
+          </ul>
+        </div>
+
+        @if (ev.friends && ev.friends.length) {
+          <div class="events__friends">
+            <p class="events__section-label">{{ 'events.with' | translate }}</p>
+            <ul>
+              @for (f of ev.friends; track f) {
+                <li>{{ f }}</li>
+              }
+            </ul>
+          </div>
+        }
+
+        @if (ev.photos.length) {
+          <div class="events__photos">
+            @for (p of ev.photos; track p.src) {
+              <button class="events__photo-btn" (click)="open(p.src)" [title]="p.alt">
+                <img [src]="p.src" [alt]="p.alt" />
+                <span class="events__photo-zoom">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                  </svg>
+                </span>
+              </button>
+            }
+          </div>
+        }
+
+        <div class="events__hashtags">
+          <span>#MeetupCodecon</span>
+          <span>#Tech</span>
+          <span>#Comunidade</span>
+        </div>
+      </div>
+
+      <div class="events__right">
+        <div class="events__post-header">
+          <img class="events__avatar" src="FotoDePerfil.png" alt="Gilson Fonseca" />
+          <div>
+            <p class="events__author">Gilson Fonseca</p>
+            <p class="events__post-meta">{{ ev.name }} · {{ 'events.reflection' | translate }}</p>
+          </div>
+          <span class="events__badge">{{ 'events.reflection' | translate }}</span>
+        </div>
+
+        <div class="events__text">
+          @for (p of ev.post; track $index) {
+            <p>{{ p[lang()] }}</p>
+          }
+        </div>
+
+        @if (ev.photos.length) {
+          <div class="events__gallery-strip">
+            <p class="events__gallery-label">{{ 'events.gallery' | translate }}</p>
+            <div class="events__gallery-thumbs">
+              @for (p of ev.photos; track p.src) {
+                <button class="events__thumb" (click)="open(p.src)" [title]="p.alt">
+                  <img [src]="p.src" [alt]="p.alt" />
+                  <span class="events__thumb-zoom">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                  </span>
+                </button>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  }
+
+</section>
+
+@if (lightbox()) {
+  <div class="events__lightbox" (click)="close()">
+    <button class="events__lightbox-close" (click)="close()">✕</button>
+    <img [src]="lightbox()!" alt="Foto do evento" (click)="$event.stopPropagation()" />
+  </div>
+}

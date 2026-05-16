@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { LanguageService } from '../../services/language.service';
@@ -15,7 +15,8 @@ interface Project {
   tags: string[];
   color: string;
   featured: boolean;
-  mockups: { title: string; subtitle: string }[];
+  link?: string;
+  mockups: { title: string; subtitle: string; image?: string }[];
 }
 
 @Component({
@@ -24,16 +25,183 @@ interface Project {
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
 })
-export class Projects {
-  activeId = signal('finanblue');
-  showAll = signal(false);
-  lang = inject(LanguageService).lang;
+export class Projects implements OnInit, OnDestroy {
+  activeId      = signal('finanblue-treinamentos');
+  showAll       = signal(false);
+  lightboxSrc   = signal<string | null>(null);
+  carouselIndex = signal(0);
+  transitioning = signal(false);
+  lang          = inject(LanguageService).lang;
+
+  private touchStartX = 0;
+  private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
+  private readonly AUTO_PLAY_INTERVAL = 5000;
+
+  ngOnInit() { this.startAutoPlay(); }
+  ngOnDestroy() { this.stopAutoPlay(); }
+
+  startAutoPlay() {
+    if (window.innerWidth <= 640) return;
+    this.stopAutoPlay();
+    this.autoPlayTimer = setInterval(() => {
+      if (this.showAll() || this.transitioning()) return;
+      const ids = this.featured.map(p => p.id);
+      const next = (ids.indexOf(this.activeId()) + 1) % ids.length;
+      this.select(ids[next]);
+    }, this.AUTO_PLAY_INTERVAL);
+  }
+
+  stopAutoPlay() {
+    if (this.autoPlayTimer) { clearInterval(this.autoPlayTimer); this.autoPlayTimer = null; }
+  }
+
+  pauseAndResume() {
+    this.stopAutoPlay();
+    setTimeout(() => this.startAutoPlay(), 8000);
+  }
+
+  carouselPrev() {
+    this.carouselIndex.update(i => Math.max(i - 1, 0));
+  }
+
+  carouselNext() {
+    this.carouselIndex.update(i => Math.min(i + 1, this.current.mockups.length - 1));
+  }
+
+  onTouchStart(e: TouchEvent) {
+    this.touchStartX = e.touches[0].clientX;
+  }
+
+  onTouchEnd(e: TouchEvent) {
+    const diff = this.touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) this.carouselNext();
+      else          this.carouselPrev();
+    }
+  }
+
+  openLightbox(src: string | undefined) {
+    if (src) this.lightboxSrc.set(src);
+  }
+
+  closeLightbox() {
+    this.lightboxSrc.set(null);
+  }
 
   projects: Project[] = [
     {
+      id: 'finanblue-treinamentos',
+      label: 'Finanblue Treinamentos',
+      featured: true,
+      period: 'Brasil · 2023–2025',
+      title: {
+        pt: 'Finanblue · Plataforma de Treinamentos',
+        en: 'Finanblue · Training Platform',
+      },
+      description: {
+        pt: 'Portal interno de vídeos, provas e exercícios criado para testar e consolidar o conhecimento dos colaboradores sobre os produtos e sistemas da Finanblue. A plataforma evoluiu continuamente com melhorias de usabilidade, novos módulos e funcionalidades — e hoje também é comercializada para clientes externos, gerando receita direta para a empresa.',
+        en: 'Internal portal of videos, assessments and exercises built to test and consolidate employees\' knowledge of Finanblue\'s products and systems. The platform evolved continuously with usability improvements and new modules — and is now also sold to external clients, generating direct revenue for the company.',
+      },
+      bullets: [
+        { pt: 'Portal de vídeos e provas sobre os produtos e sistemas internos da Finanblue', en: 'Video and assessment portal covering Finanblue\'s internal products and systems' },
+        { pt: 'Plataforma em produção com mais de 30 usuários ativos — vendida a clientes gerando receita', en: 'Production platform with 30+ active users — sold to clients generating revenue' },
+        { pt: 'Melhorias contínuas: novos módulos, trilhas de aprendizado e experiência do usuário', en: 'Continuous improvements: new modules, learning paths and user experience upgrades' },
+        { pt: 'Geração de certificados em PDF, upload para AWS S3 e autenticação JWT com Passport', en: 'PDF certificate generation, AWS S3 upload and JWT authentication with Passport' },
+      ],
+      tags: ['ANGULAR', 'NESTJS', 'POSTGRESQL', 'PRISMA', 'JWT', 'AWS S3', 'SWAGGER', 'VERCEL'],
+      color: '#00c9a7',
+      mockups: [
+        { title: 'Home · Catálogo', subtitle: 'Tela inicial',        image: 'FinanblueTreinamentoHome.png' },
+        { title: 'Aula · Player',   subtitle: 'Tela de vídeo',       image: 'FinanblueTreinamentoTelaVideo.png' },
+        { title: 'Prova Online',    subtitle: 'Avaliação do módulo',  image: 'FinanblueTreinamentoProva.png' },
+        { title: 'Assistir Aula',   subtitle: 'Player completo',      image: 'FinanblueTreinamentoTelaAssist1.png' },
+      ],
+    },
+    {
+      id: 'pdv-caixa',
+      label: 'PDV Caixa',
+      featured: true,
+      period: 'Brasil · 2022–2023',
+      title: {
+        pt: 'PDV Caixa · Sistema de Ponto de Venda',
+        en: 'PDV Caixa · Point of Sale System',
+      },
+      description: {
+        pt: 'Sistema desktop de ponto de venda (PDV) desenvolvido em C# e WPF para controle completo de caixa, movimentações operacionais e geração de relatórios financeiros. Solução robusta para gestão de fluxo de caixa com interface moderna e intuitiva.',
+        en: 'Desktop point of sale (PDV) system developed in C# and WPF for full cash register control, operational movements and financial report generation. Robust solution for cash flow management with a modern and intuitive interface.',
+      },
+      bullets: [
+        { pt: 'Controle completo de abertura, fechamento e movimentações de caixa', en: 'Full control of cash register opening, closing and movements' },
+        { pt: 'Tela de operações com registro de entradas, saídas e histórico de transações', en: 'Operations screen with income, expense recording and transaction history' },
+        { pt: 'Relatórios gerados automaticamente com totais por período e por operador', en: 'Automatically generated reports with totals by period and operator' },
+      ],
+      tags: ['C#', '.NET', 'WPF', 'SQL SERVER'],
+      color: '#f59e0b',
+      mockups: [
+        { title: 'Home · Painel',  subtitle: 'Tela inicial',          image: 'PDV CAIXA_hOME.png' },
+        { title: 'Operações',      subtitle: 'Movimentações de caixa', image: 'PDV Caixa_TelaOp.png' },
+        { title: 'Relatórios',     subtitle: 'Geração de relatórios',  image: 'PDV_CAIXA_RelatoriosGere.png' },
+        { title: 'Mov. Operador',  subtitle: 'Histórico por operador', image: 'PDV_CAIXA_MOV_OP.png' },
+        { title: 'Visão Geral',    subtitle: 'Painel completo',        image: 'PDV_CAIXA_um.png' },
+      ],
+    },
+    {
+      id: 'influenciando-geracoes',
+      label: 'Influenciando Gerações',
+      featured: false,
+      period: 'Brasil · 2024',
+      title: {
+        pt: 'Influenciando Gerações · Site Institucional',
+        en: 'Influenciando Gerações · Institutional Website',
+      },
+      description: {
+        pt: 'Projeto desenvolvido ao longo de um período de evolução contínua para consolidar conhecimentos práticos em desenvolvimento full stack, arquitetura de sistemas e integração com banco de dados em um cenário realista. A solução reúne dois grandes módulos: um Sistema de Ocorrências Bancárias e um Portal de Notícias, simulando um ambiente corporativo onde informações financeiras, operacionais e informativas coexistem de forma integrada.',
+        en: 'Project developed over a period of continuous evolution to consolidate practical knowledge in full stack development, system architecture and database integration in a realistic scenario. The solution brings together two major modules: a Banking Incidents System and a News Portal, simulating a corporate environment where financial, operational and informational data coexist in an integrated way.',
+      },
+      bullets: [
+        { pt: 'Módulo de ocorrências bancárias com consulta, padronização e categorização', en: 'Banking incidents module with search, standardisation and categorisation' },
+        { pt: 'Portal de notícias integrado ao mesmo ambiente corporativo simulado', en: 'News portal integrated into the same simulated corporate environment' },
+        { pt: 'Projeto publicado e acessível online — evolução contínua de funcionalidades', en: 'Project published and accessible online — continuously evolving features' },
+      ],
+      tags: ['REACT', 'NODE.JS', 'CSS'],
+      color: '#10b981',
+      link: 'https://courageous-druid-a551b3.netlify.app/',
+      mockups: [
+        { title: 'Home',       subtitle: 'Página inicial',    image: 'ong_home.png' },
+        { title: 'Quem Somos', subtitle: 'Nossa história',    image: 'ong_somos.png' },
+        { title: 'Projetos',   subtitle: 'Iniciativas sociais', image: 'ong_projetos.png' },
+      ],
+    },
+    {
+      id: 'portal-escola',
+      label: 'Portal Escola',
+      featured: false,
+      period: 'Brasil · 2023',
+      title: {
+        pt: 'Portal Escola · Projeto JP',
+        en: 'School Portal · JP Project',
+      },
+      description: {
+        pt: 'Publicação educativa dedicada a fornecer informações relevantes aos leitores, com foco na história do C.E. Papa João Paulo I. O portal promove aprendizado e conhecimento em diversas áreas, abordando temas de interesse educacional e cultural, destacando a importância da escola como parte integrante do processo educacional.',
+        en: 'Educational publication dedicated to providing relevant information to readers, focusing on the history of C.E. Papa João Paulo I. The portal promotes learning and knowledge across various areas, covering topics of educational and cultural interest.',
+      },
+      bullets: [
+        { pt: 'Blog educativo com artigos sobre história e cultura da escola', en: 'Educational blog with articles on the school\'s history and culture' },
+        { pt: 'Conteúdo que estimula o aprendizado e enriquece a compreensão dos leitores', en: 'Content that stimulates learning and enriches readers\' understanding' },
+        { pt: 'Interface moderna focada na experiência de leitura e navegação', en: 'Modern interface focused on reading and navigation experience' },
+      ],
+      tags: ['REACT', 'CSS', 'NODE.JS'],
+      color: '#6366f1',
+      mockups: [
+        { title: 'Portal da Escola', subtitle: 'Página principal', image: 'PortalDaEscola.png' },
+        { title: 'Artigos',          subtitle: 'Publicações educativas', image: undefined },
+        { title: 'Sobre',            subtitle: 'História da escola',     image: undefined },
+      ],
+    },
+    {
       id: 'finanblue',
       label: 'Finanblue',
-      featured: true,
+      featured: false,
       period: 'Brasil · 2023–2025',
       title: {
         pt: 'Finanblue · Portal Financeiro',
@@ -57,133 +225,30 @@ export class Projects {
       ],
     },
     {
-      id: 'ecommerce',
-      label: 'E-commerce',
-      featured: true,
-      period: 'Brasil · 2022–2023',
-      title: {
-        pt: 'Plataforma · E-commerce',
-        en: 'Platform · E-commerce',
-      },
-      description: {
-        pt: 'Plataforma de e-commerce completa com catálogo de produtos, carrinho, checkout com gateway de pagamento e painel administrativo.',
-        en: 'Full e-commerce platform with product catalogue, cart, checkout with payment gateway and admin dashboard.',
-      },
-      bullets: [
-        { pt: 'Integração com Stripe e PagSeguro para processamento de pagamentos', en: 'Stripe and PagSeguro integration for payment processing' },
-        { pt: 'Sistema de busca com filtros dinâmicos e paginação performática', en: 'Search system with dynamic filters and performant pagination' },
-        { pt: 'Painel admin para gestão de estoque, pedidos e clientes', en: 'Admin panel for inventory, order and customer management' },
-      ],
-      tags: ['REACT', 'NODE.JS', 'MONGODB', 'STRIPE'],
-      color: '#10b981',
-      mockups: [
-        { title: 'Catálogo de Produtos', subtitle: 'Listagem com filtros' },
-        { title: 'Página do Produto', subtitle: 'Detalhes e variações' },
-        { title: 'Checkout', subtitle: 'Fluxo de pagamento' },
-      ],
-    },
-    {
-      id: 'saas',
-      label: 'SaaS App',
-      featured: true,
-      period: 'Brasil · 2024',
-      title: {
-        pt: 'SaaS · Gestão de Tarefas',
-        en: 'SaaS · Task Management',
-      },
-      description: {
-        pt: 'Aplicação SaaS para gestão de tarefas e projetos em equipe, com colaboração em tempo real, notificações e integrações via webhooks.',
-        en: 'SaaS application for team task and project management, with real-time collaboration, notifications and webhook integrations.',
-      },
-      bullets: [
-        { pt: 'Comunicação em tempo real com WebSockets para colaboração simultânea', en: 'Real-time communication with WebSockets for simultaneous collaboration' },
-        { pt: 'Sistema de notificações push e e-mail para atualizações de tarefas', en: 'Push and email notification system for task updates' },
-        { pt: 'Integração com GitHub e Slack via webhooks configuráveis', en: 'GitHub and Slack integration via configurable webhooks' },
-      ],
-      tags: ['ANGULAR', 'WEBSOCKET', 'EXPRESS', 'DOCKER'],
-      color: '#8b5cf6',
-      mockups: [
-        { title: 'Board de Projetos', subtitle: 'Kanban em tempo real' },
-        { title: 'Timeline', subtitle: 'Visão por período' },
-        { title: 'Notificações', subtitle: 'Central de alertas' },
-      ],
-    },
-    {
       id: 'banco-ocorrencias',
-      label: 'Banco de Ocorrências',
-      featured: false,
+      label: 'Banco Ocorrências',
+      featured: true,
       period: 'Brasil · 2023',
       title: {
         pt: 'Banco de Ocorrências · Gestão Interna',
         en: 'Incident Log · Internal Management',
       },
       description: {
-        pt: 'Sistema interno para registro e acompanhamento de ocorrências operacionais, com fluxo de aprovação e geração de relatórios.',
-        en: 'Internal system for recording and tracking operational incidents, with approval workflow and report generation.',
+        pt: 'Sistema desenvolvido com foco na centralização, padronização e consulta de ocorrências bancárias. O portal auxilia usuários na identificação do significado das ocorrências e centraliza layouts bancários, ordens e informações operacionais em um único ambiente. Construído com Angular no frontend e ASP.NET Core com C# no backend, integrado ao PostgreSQL. Atualmente utilizado por mais de 15 pessoas no suporte da empresa.',
+        en: 'System built to centralise, standardise and query banking incidents. The portal helps users identify the meaning of incidents and centralises bank layouts, orders and operational information in a single environment. Built with Angular on the frontend and ASP.NET Core with C# on the backend, integrated with PostgreSQL. Currently used by over 15 people in the company\'s support team.',
       },
       bullets: [
-        { pt: 'Módulo de registro com categorização e prioridade de ocorrências', en: 'Registration module with incident categorisation and priority' },
-        { pt: 'Painel de acompanhamento com filtros e busca avançada', en: 'Tracking dashboard with filters and advanced search' },
-        { pt: 'Relatórios em PDF e Excel para auditoria e compliance', en: 'PDF and Excel reports for audit and compliance' },
+        { pt: 'Consulta e identificação de ocorrências bancárias com padronização centralizada', en: 'Query and identification of banking incidents with centralised standardisation' },
+        { pt: 'Portal unificado com layouts bancários, ordens e informações operacionais', en: 'Unified portal with bank layouts, orders and operational information' },
+        { pt: 'Mais de 15 usuários ativos auxiliando o setor de suporte da empresa', en: 'Over 15 active users supporting the company\'s support team' },
       ],
       tags: ['ANGULAR', 'C#', 'SQL SERVER', '.NET'],
       color: '#f59e0b',
       mockups: [
-        { title: 'Registro de Ocorrência', subtitle: 'Formulário categorizado' },
-        { title: 'Painel de Controle', subtitle: 'Listagem e filtros' },
-        { title: 'Relatórios', subtitle: 'Exportação PDF/Excel' },
-      ],
-    },
-    {
-      id: 'api-gateway',
-      label: 'API Gateway',
-      featured: false,
-      period: 'Brasil · 2024',
-      title: {
-        pt: 'API Gateway · Microsserviços',
-        en: 'API Gateway · Microservices',
-      },
-      description: {
-        pt: 'Implementação de API Gateway para orquestração de microsserviços, com autenticação centralizada, rate limiting e monitoramento.',
-        en: 'API Gateway implementation for microservice orchestration, with centralised authentication, rate limiting and monitoring.',
-      },
-      bullets: [
-        { pt: 'Roteamento dinâmico com load balancing entre instâncias', en: 'Dynamic routing with load balancing across instances' },
-        { pt: 'Autenticação JWT centralizada com refresh token automático', en: 'Centralised JWT authentication with automatic token refresh' },
-        { pt: 'Dashboard de monitoramento com métricas em tempo real', en: 'Monitoring dashboard with real-time metrics' },
-      ],
-      tags: ['NODE.JS', 'DOCKER', 'NGINX', 'REDIS'],
-      color: '#ef4444',
-      mockups: [
-        { title: 'Gateway Dashboard', subtitle: 'Monitoramento de rotas' },
-        { title: 'Auth Service', subtitle: 'Gestão de tokens' },
-        { title: 'Rate Limiting', subtitle: 'Controle de requisições' },
-      ],
-    },
-    {
-      id: 'mobile-app',
-      label: 'Mobile App',
-      featured: false,
-      period: 'Brasil · 2022',
-      title: {
-        pt: 'App Mobile · Finanças Pessoais',
-        en: 'Mobile App · Personal Finance',
-      },
-      description: {
-        pt: 'Aplicativo mobile para controle de finanças pessoais, com categorização automática de gastos, metas e notificações inteligentes.',
-        en: 'Mobile app for personal finance tracking, with automatic expense categorisation, goals and smart notifications.',
-      },
-      bullets: [
-        { pt: 'Sincronização offline-first com resolução de conflitos', en: 'Offline-first sync with conflict resolution' },
-        { pt: 'Categorização automática de transações', en: 'Automatic transaction categorisation' },
-        { pt: 'Widget para acompanhamento rápido na tela inicial', en: 'Home screen widget for quick balance overview' },
-      ],
-      tags: ['REACT NATIVE', 'EXPO', 'SQLITE', 'FIREBASE'],
-      color: '#ec4899',
-      mockups: [
-        { title: 'Dashboard', subtitle: 'Resumo financeiro' },
-        { title: 'Transações', subtitle: 'Histórico categorizado' },
-        { title: 'Metas', subtitle: 'Progresso visual' },
+        { title: 'Home',        subtitle: 'Tela inicial',            image: 'BANCO_OCORRENCIA_HOME.png' },
+        { title: 'Ocorrências', subtitle: 'Registro de ocorrências', image: 'BANCO_OCORRENCIA_OCORRENCIA.png' },
+        { title: 'Notícias',    subtitle: 'Comunicados internos',    image: 'BANCO_OCORRENCIA_NOTICIA.png' },
+        { title: 'Validador',   subtitle: 'Validação de dados',      image: 'BANCO_OCORRENCIA_VALIDADOR.png' },
       ],
     },
   ];
@@ -196,9 +261,16 @@ export class Projects {
     return this.projects.find(p => p.id === this.activeId()) ?? this.projects[0];
   }
 
-  select(id: string) {
-    this.activeId.set(id);
-    this.showAll.set(false);
+  select(id: string, manual = false) {
+    if (id === this.activeId() || this.transitioning()) return;
+    if (manual) this.pauseAndResume();
+    this.transitioning.set(true);
+    setTimeout(() => {
+      this.activeId.set(id);
+      this.carouselIndex.set(0);
+      this.showAll.set(false);
+      setTimeout(() => this.transitioning.set(false), 400);
+    }, 280);
   }
 
   openAll() { this.showAll.set(true); }
@@ -210,6 +282,8 @@ export class Projects {
       'REACT': 'devicon-react-original',
       'REACT NATIVE': 'devicon-react-original',
       'NODE.JS': 'devicon-nodejs-plain',
+      'NESTJS': 'devicon-nestjs-plain',
+      'TYPESCRIPT': 'devicon-typescript-plain',
       'POSTGRESQL': 'devicon-postgresql-plain',
       'MONGODB': 'devicon-mongodb-plain',
       'DOCKER': 'devicon-docker-plain',
@@ -222,6 +296,11 @@ export class Projects {
       'SQL SERVER': 'devicon-microsoftsqlserver-plain',
       'SQLITE': 'devicon-sqlite-plain',
       'EXPO': 'devicon-react-original',
+      'PRISMA': 'devicon-prisma-original',
+      'AWS S3': 'devicon-amazonwebservices-plain',
+      'SWAGGER': 'devicon-swagger-plain',
+      'VERCEL': 'devicon-vercel-plain',
+      'JWT': 'devicon-nodejs-plain',
     };
     return icons[tag] ?? '';
   }

@@ -3,13 +3,16 @@
   <div class="projects__header">
     <span class="projects__label">{{ 'proj.label' | translate }}</span>
 
-    <nav class="projects__tabs">
+    <nav class="projects__tabs" (mouseenter)="stopAutoPlay()" (mouseleave)="startAutoPlay()">
       @for (p of featured; track p.id) {
         <button
           class="projects__tab"
           [ngClass]="{ active: activeId() === p.id }"
-          (click)="select(p.id)">
+          (click)="select(p.id, true)">
           {{ p.label }}
+          @if (activeId() === p.id) {
+            <span class="projects__tab-progress"></span>
+          }
         </button>
       }
     </nav>
@@ -17,18 +20,66 @@
     <button class="projects__all" (click)="openAll()">{{ 'proj.all' | translate }}</button>
   </div>
 
-  <div class="projects__content">
+  <!-- Carousel mobile -->
+  <div class="projects__carousel" [class.proj-exit]="transitioning()"
+       (touchstart)="onTouchStart($event)"
+       (touchend)="onTouchEnd($event)">
+
+    <button class="projects__carousel-arrow projects__carousel-arrow--prev"
+            (click)="carouselPrev()"
+            [disabled]="carouselIndex() === 0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <div class="projects__carousel-track"
+         [style.transform]="'translateX(-' + carouselIndex() * 100 + '%)'">
+      @for (m of current.mockups; track $index) {
+        <div class="projects__carousel-slide">
+          <div class="projects__mockup-bar"><span></span><span></span><span></span></div>
+          @if (m.image) {
+            <img [src]="m.image" [alt]="m.title" (click)="openLightbox(m.image)" />
+          }
+          <p class="projects__mockup-label">{{ m.title }}</p>
+        </div>
+      }
+    </div>
+
+    <button class="projects__carousel-arrow projects__carousel-arrow--next"
+            (click)="carouselNext()"
+            [disabled]="carouselIndex() === current.mockups.length - 1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+
+    <div class="projects__carousel-dots">
+      @for (m of current.mockups; track $index) {
+        <button
+          [class.active]="carouselIndex() === $index"
+          (click)="carouselIndex.set($index)">
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="projects__content" [class.proj-exit]="transitioning()" [class.proj-enter]="!transitioning()">
 
     <div class="projects__mockups">
       <div class="projects__mockup projects__mockup--a" [style.--accent]="current.color">
         <div class="projects__mockup-inner">
           <div class="projects__mockup-bar"><span></span><span></span><span></span></div>
-          <div class="projects__mockup-ui">
-            <div class="ui-header"></div>
-            <div class="ui-row wide"></div>
-            <div class="ui-row"></div>
-            <div class="ui-grid"><div></div><div></div><div></div><div></div></div>
-          </div>
+          @if (current.mockups[0].image) {
+            <img class="projects__mockup-screenshot" [src]="current.mockups[0].image" [alt]="current.mockups[0].title" (click)="openLightbox(current.mockups[0].image)" />
+          } @else {
+            <div class="projects__mockup-ui">
+              <div class="ui-header"></div>
+              <div class="ui-row wide"></div>
+              <div class="ui-row"></div>
+              <div class="ui-grid"><div></div><div></div><div></div><div></div></div>
+            </div>
+          }
         </div>
         <p class="projects__mockup-label">{{ current.mockups[0].title }}</p>
       </div>
@@ -36,12 +87,16 @@
       <div class="projects__mockup projects__mockup--b" [style.--accent]="current.color">
         <div class="projects__mockup-inner">
           <div class="projects__mockup-bar"><span></span><span></span><span></span></div>
-          <div class="projects__mockup-ui">
-            <div class="ui-title"></div>
-            <div class="ui-row"></div>
-            <div class="ui-row narrow"></div>
-            <div class="ui-table"><div></div><div></div><div></div><div></div><div></div><div></div></div>
-          </div>
+          @if (current.mockups[1].image) {
+            <img class="projects__mockup-screenshot" [src]="current.mockups[1].image" [alt]="current.mockups[1].title" (click)="openLightbox(current.mockups[1].image)" />
+          } @else {
+            <div class="projects__mockup-ui">
+              <div class="ui-title"></div>
+              <div class="ui-row"></div>
+              <div class="ui-row narrow"></div>
+              <div class="ui-table"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+          }
         </div>
         <p class="projects__mockup-label">{{ current.mockups[1].title }}</p>
       </div>
@@ -49,17 +104,33 @@
       <div class="projects__mockup projects__mockup--c" [style.--accent]="current.color">
         <div class="projects__mockup-inner">
           <div class="projects__mockup-bar"><span></span><span></span><span></span></div>
-          <div class="projects__mockup-ui">
-            <div class="ui-title"></div>
-            <div class="ui-row wide"></div>
-            <div class="ui-chips"><div></div><div></div><div></div></div>
-          </div>
+          @if (current.mockups[2].image) {
+            <img class="projects__mockup-screenshot" [src]="current.mockups[2].image" [alt]="current.mockups[2].title" (click)="openLightbox(current.mockups[2].image)" />
+          } @else {
+            <div class="projects__mockup-ui">
+              <div class="ui-title"></div>
+              <div class="ui-row wide"></div>
+              <div class="ui-chips"><div></div><div></div><div></div></div>
+            </div>
+          }
         </div>
         <p class="projects__mockup-label">{{ current.mockups[2].title }}</p>
       </div>
 
       <div class="projects__view-btn">VIEW</div>
     </div>
+
+    @if (current.mockups.length > 3) {
+      <div class="projects__thumbs">
+        @for (m of current.mockups; track $index) {
+          @if (m.image) {
+            <button class="projects__thumb" (click)="openLightbox(m.image)" [title]="m.title">
+              <img [src]="m.image" [alt]="m.title" />
+            </button>
+          }
+        }
+      </div>
+    }
 
     <div class="projects__details">
       <p class="projects__period">{{ current.period }}</p>
@@ -80,6 +151,17 @@
           </span>
         }
       </div>
+
+      @if (current.link) {
+        <a class="projects__link" [href]="current.link" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Ver projeto online
+        </a>
+      }
     </div>
 
   </div>
@@ -96,20 +178,18 @@
           <button class="projects__panel-close" (click)="closeAll()">✕</button>
         </div>
 
-        <div class="projects__panel-grid">
+        <div class="projects__article-list">
           @for (p of projects; track p.id) {
             <button
-              class="projects__card"
-              [ngClass]="{ 'projects__card--active': activeId() === p.id }"
+              class="projects__article"
+              [ngClass]="{ 'projects__article--active': activeId() === p.id }"
               [style.--accent]="p.color"
-              (click)="select(p.id)">
-              <div class="projects__card-bar"></div>
-              <div class="projects__card-body">
-                <p class="projects__card-period">{{ p.period }}</p>
-                <h4 class="projects__card-name">{{ p.title[lang()] }}</h4>
-                <p class="projects__card-desc">{{ p.description[lang()] }}</p>
-                <div class="projects__card-tags">
-                  @for (t of p.tags; track t) {
+              (click)="select(p.id, true)">
+
+              <div class="projects__article-left">
+                <span class="projects__article-period">{{ p.period }}</span>
+                <div class="projects__article-tags">
+                  @for (t of p.tags.slice(0, 3); track t) {
                     <span>
                       @if (getTagIcon(t)) { <i [class]="getTagIcon(t)"></i> }
                       {{ t }}
@@ -117,14 +197,32 @@
                   }
                 </div>
               </div>
-              @if (activeId() === p.id) {
-                <div class="projects__card-badge">{{ 'proj.badge' | translate }}</div>
-              }
+
+              <div class="projects__article-body">
+                <div class="projects__article-accent" [style.background]="p.color"></div>
+                <h4 class="projects__article-title">{{ p.title[lang()] }}</h4>
+                <p class="projects__article-desc">{{ p.description[lang()] }}</p>
+              </div>
+
+              <div class="projects__article-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
+
             </button>
           }
         </div>
 
       </div>
+    </div>
+  }
+
+
+  @if (lightboxSrc()) {
+    <div class="projects__lightbox" (click)="closeLightbox()">
+      <button class="projects__lightbox-close" (click)="closeLightbox()">✕</button>
+      <img [src]="lightboxSrc()!" alt="Screenshot" (click)="$event.stopPropagation()" />
     </div>
   }
 

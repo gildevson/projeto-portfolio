@@ -35,3 +35,12 @@ a {
   background: var(--white);
   color: var(--black);
 }
+
+.lang-fade {
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.lang-fade * {
+  pointer-events: none;
+}

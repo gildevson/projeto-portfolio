@@ -17,7 +17,7 @@
         'enter-right':animState() === 'enter' && direction() === 'right'
       }">
       <div class="testimonials__quote-mark">"</div>
-      <p class="testimonials__text">{{ current.quote }}</p>
+      <p class="testimonials__text">{{ current.quote[lang()] }}</p>
       <div class="testimonials__author">
         @if (current.photo) {
           <img class="testimonials__photo" [src]="current.photo" [alt]="current.name" />
@@ -25,7 +25,11 @@
           <div class="testimonials__avatar">{{ current.name.charAt(0) }}</div>
         }
         <div>
-          <strong class="testimonials__name">{{ current.name }}</strong>
+          @if (current.link) {
+            <a class="testimonials__name" [href]="current.link" target="_blank" rel="noopener noreferrer">{{ current.name }}</a>
+          } @else {
+            <strong class="testimonials__name">{{ current.name }}</strong>
+          }
           <span class="testimonials__role">{{ current.role }}</span>
         </div>
       </div>
