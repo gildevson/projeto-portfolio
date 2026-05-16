@@ -37,28 +37,14 @@ export class Projects implements OnInit, OnDestroy {
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
   private readonly AUTO_PLAY_INTERVAL = 5000;
 
-  ngOnInit() { this.startAutoPlay(); }
+  ngOnInit() { }
   ngOnDestroy() { this.stopAutoPlay(); }
 
-  startAutoPlay() {
-    if (window.innerWidth <= 640) return;
-    this.stopAutoPlay();
-    this.autoPlayTimer = setInterval(() => {
-      if (this.showAll() || this.transitioning()) return;
-      const ids = this.featured.map(p => p.id);
-      const next = (ids.indexOf(this.activeId()) + 1) % ids.length;
-      this.select(ids[next]);
-    }, this.AUTO_PLAY_INTERVAL);
-  }
-
+  startAutoPlay() { }
   stopAutoPlay() {
     if (this.autoPlayTimer) { clearInterval(this.autoPlayTimer); this.autoPlayTimer = null; }
   }
-
-  pauseAndResume() {
-    this.stopAutoPlay();
-    setTimeout(() => this.startAutoPlay(), 8000);
-  }
+  pauseAndResume() { }
 
   carouselPrev() {
     this.carouselIndex.update(i => Math.max(i - 1, 0));

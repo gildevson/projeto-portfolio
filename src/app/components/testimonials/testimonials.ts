@@ -82,7 +82,7 @@ export class Testimonials {
         en: 'It was a very rewarding experience working with this extremely competent professional, committed to timely work. He was a great team player and always very helpful.',
       },
       name: 'Jim Chang',
-      role: 'Colega de equipe · Unigatec',
+      role: 'Colega de equipe · Unifatec',
       photo: 'JIM_CHANG.jpg',
       link: 'https://www.linkedin.com/in/jim-chang-868290179/',
     },
