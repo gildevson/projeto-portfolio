@@ -85,16 +85,16 @@ export class Projects implements OnInit, OnDestroy {
         en: 'Finanblue · Training Platform',
       },
       description: {
-        pt: 'Portal interno de vídeos, provas e exercícios criado para testar e consolidar o conhecimento dos colaboradores sobre os produtos e sistemas da Finanblue. A plataforma evoluiu continuamente com melhorias de usabilidade, novos módulos e funcionalidades — e hoje também é comercializada para clientes externos, gerando receita direta para a empresa.',
-        en: 'Internal portal of videos, assessments and exercises built to test and consolidate employees\' knowledge of Finanblue\'s products and systems. The platform evolved continuously with usability improvements and new modules — and is now also sold to external clients, generating direct revenue for the company.',
+        pt: 'Portal interno de vídeos, provas e exercícios criado para treinar colaboradores sobre os produtos e sistemas da Finanblue. Com o tempo, evoluiu para um sistema complementar ao principal software da empresa — hoje comercializado para clientes externos e gerando receita direta, tornando-se parte estratégica do negócio.',
+        en: 'Internal portal of videos, assessments and exercises built to train employees on Finanblue\'s products and systems. Over time, it evolved into a complementary system to the company\'s core software — now sold to external clients and generating direct revenue, becoming a strategic part of the business.',
       },
       bullets: [
-        { pt: 'Portal de vídeos e provas sobre os produtos e sistemas internos da Finanblue', en: 'Video and assessment portal covering Finanblue\'s internal products and systems' },
-        { pt: 'Plataforma em produção com mais de 30 usuários ativos — vendida a clientes gerando receita', en: 'Production platform with 30+ active users — sold to clients generating revenue' },
+        { pt: 'Sistema complementar ao software principal da empresa, gerando receita para o negócio', en: 'Complementary system to the company\'s core software, generating revenue for the business' },
+        { pt: 'Módulo extra da plataforma principal em produção com mais de 30 usuários ativos — vendido a clientes externos', en: 'Extra module of the main platform in production with 30+ active users — sold to external clients' },
         { pt: 'Melhorias contínuas: novos módulos, trilhas de aprendizado e experiência do usuário', en: 'Continuous improvements: new modules, learning paths and user experience upgrades' },
         { pt: 'Geração de certificados em PDF, upload para AWS S3 e autenticação JWT com Passport', en: 'PDF certificate generation, AWS S3 upload and JWT authentication with Passport' },
       ],
-      tags: ['ANGULAR', 'NESTJS', 'POSTGRESQL', 'PRISMA', 'JWT', 'AWS S3', 'SWAGGER', 'VERCEL'],
+      tags: ['ANGULAR', 'NESTJS', 'TYPESCRIPT', 'POSTGRESQL', 'PRISMA', 'JWT', 'AWS S3', 'SWAGGER', 'HOSTINGER', 'RENDER'],
       color: '#00c9a7',
       mockups: [
         { title: 'Home · Catálogo', subtitle: 'Tela inicial',        image: 'FinanblueTreinamentoHome.png' },
@@ -261,6 +261,8 @@ export class Projects implements OnInit, OnDestroy {
       'SWAGGER': 'devicon-swagger-plain',
       'VERCEL': 'devicon-vercel-plain',
       'JWT': 'devicon-nodejs-plain',
+      'RENDER': '',
+      'HOSTINGER': '',
     };
     return icons[tag] ?? '';
   }
