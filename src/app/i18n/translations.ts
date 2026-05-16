@@ -6,6 +6,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'nav.services':      'SERVIÇOS',
     'nav.projects':      'PROJETOS',
     'nav.about':         'SOBRE MIM',
+    'nav.events':        'EVENTOS',
     'nav.testimonials':  'DEPOIMENTOS',
     'nav.contact':       'CONTATO',
     // Hero
@@ -49,6 +50,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'about.c4.tag':      'Evento',
     'about.c4.title':    'CodeCon Summit 2025',
     'about.c4.sub':      'Participante',
+    'about.c4.link':     'Ver todos os eventos',
     'about.post.meta':   'Code Con Summit 2025 · Reflexão profissional',
     'about.post.badge':  'Reflexão',
     'about.post.p1':     'Participar da Codecon Summit 25 foi uma experiência marcante na minha trajetória profissional. O evento superou todas as expectativas, proporcionando muito mais do que aprendizado técnico: foi uma verdadeira imersão em conhecimento, networking e troca de experiências com grandes nomes da tecnologia.',
@@ -90,6 +92,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'nav.services':      'SERVICES',
     'nav.projects':      'PROJECTS',
     'nav.about':         'ABOUT ME',
+    'nav.events':        'EVENTS',
     'nav.testimonials':  'TESTIMONIALS',
     'nav.contact':       'CONTACT',
     // Hero
@@ -133,6 +136,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'about.c4.tag':      'Event',
     'about.c4.title':    'CodeCon Summit 2025',
     'about.c4.sub':      'Attendee',
+    'about.c4.link':     'See all events',
     'about.post.meta':   'Code Con Summit 2025 · Professional reflection',
     'about.post.badge':  'Reflection',
     'about.post.p1':     'Attending Codecon Summit 25 was a landmark experience in my professional journey. The event exceeded all expectations, delivering much more than technical learning — it was a full immersion in knowledge, networking and experience-sharing with leading names in technology.',

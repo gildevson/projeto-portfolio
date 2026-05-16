@@ -199,32 +199,6 @@ export class Projects implements OnInit, OnDestroy {
       ],
     },
     {
-      id: 'finanblue',
-      label: 'Finanblue',
-      featured: false,
-      period: 'Brasil · 2023–2025',
-      title: {
-        pt: 'Finanblue · Portal Financeiro',
-        en: 'Finanblue · Financial Portal',
-      },
-      description: {
-        pt: 'Desenvolvimento do portal interno de gestão financeira, com dashboards em tempo real, relatórios automatizados e fluxo de aprovação de pagamentos.',
-        en: 'Development of the internal financial management portal, with real-time dashboards, automated reports and payment approval workflows.',
-      },
-      bullets: [
-        { pt: 'Construção do front-end completo com Angular e integração com APIs REST', en: 'Full front-end built with Angular and REST API integration' },
-        { pt: 'Redução de 40% no tempo de geração de relatórios com otimizações de consulta', en: '40% reduction in report generation time through query optimisations' },
-        { pt: 'Implementação de autenticação SSO e controle de permissões por perfil', en: 'SSO authentication and role-based permission control implemented' },
-      ],
-      tags: ['ANGULAR', 'NODE.JS', 'POSTGRESQL', 'REST API'],
-      color: '#3b82f6',
-      mockups: [
-        { title: 'Dashboard Financeiro', subtitle: 'Visão geral em tempo real' },
-        { title: 'Relatórios', subtitle: 'Exportação automatizada' },
-        { title: 'Gestão de Usuários', subtitle: 'Controle de acesso' },
-      ],
-    },
-    {
       id: 'banco-ocorrencias',
       label: 'Banco Ocorrências',
       featured: true,

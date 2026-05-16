@@ -339,10 +339,7 @@
 
   // ── Strip de thumbs na coluna direita ─────────────
   &__gallery-strip {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    padding-top: 20px;
-
-    @media (max-width: 1024px) { display: none; }
+    display: none;
   }
 
   &__gallery-label {
