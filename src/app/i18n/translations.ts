@@ -65,6 +65,8 @@ export const translations: Record<Lang, Record<string, string>> = {
     'services.be.desc':  'Construção de APIs robustas e escaláveis. Integração com bancos de dados, autenticação, e toda a infraestrutura que sustenta uma aplicação de verdade.',
     'services.eng.title':'Engenharia de Software',
     'services.eng.desc': 'Boas práticas de código, arquitetura limpa e processos que tornam o desenvolvimento sustentável — o tipo de coisa chata que silenciosamente salva horas de retrabalho.',
+    'services.data.title':'Análise de Sistemas & Dados',
+    'services.data.desc': 'Desenvolvimento de sistemas internos com TypeScript, Angular e .NET C#, criação de relatórios com Crystal Reports, manutenção de views, migração de dados e servidores — com foco em lógicas de regras de negócio e sistemas complementares que otimizam processos reais.',
     // Experience
     'exp.label':         '— ONDE TRABALHEI',
     'exp.heading':       'Experiência',
@@ -151,6 +153,8 @@ export const translations: Record<Lang, Record<string, string>> = {
     'services.be.desc':  'Building robust and scalable APIs. Database integration, authentication, and all the infrastructure that makes a real application work.',
     'services.eng.title':'Software Engineering',
     'services.eng.desc': 'Good coding practices, clean architecture and processes that make development sustainable — the boring stuff that silently saves hours of rework.',
+    'services.data.title':'Systems Analysis & Data',
+    'services.data.desc': 'Internal system development with TypeScript, Angular and .NET C#, report creation with Crystal Reports, view maintenance, data and server migration — focused on business rule logic and complementary systems that optimise real-world processes.',
     // Experience
     'exp.label':         '— WHERE I\'VE WORKED',
     'exp.heading':       'Professional',

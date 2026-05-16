@@ -33,10 +33,10 @@ export class Experience implements AfterViewInit {
       company: 'Finanblue',
       logo: 'logo_finanblue.png',
       description: {
-        pt: 'Criação de relatórios complexos com Crystal Reports e manutenção de bancos de dados SQL Server. Atendimento ao cliente para entendimento de necessidades e entrega de soluções eficazes. Participação em migração de servidores, manutenção de views e geração de insights estratégicos através de relatórios. Evolução do suporte técnico para papel ativo de desenvolvedor.',
-        en: 'Creation of complex reports with Crystal Reports and SQL Server database maintenance. Client support to understand needs and deliver effective solutions. Participation in server migrations, view maintenance and generation of strategic insights through reports. Evolution from technical support to an active developer role.',
+        pt: 'Criação de relatórios complexos com Crystal Reports e manutenção de bancos de dados SQL Server. Desenvolvimento interno de sistemas complementares com TypeScript, Angular e .NET C#, incluindo lógicas de regras de negócio que apoiam os processos da empresa. Participação em migração de servidores e dados, manutenção de views e geração de insights estratégicos. Evolução do suporte técnico para papel ativo de desenvolvedor full stack.',
+        en: 'Creation of complex reports with Crystal Reports and SQL Server database maintenance. Internal development of complementary systems using TypeScript, Angular and .NET C#, including business rule logic that supports company processes. Participation in server and data migrations, view maintenance and generation of strategic insights. Evolution from technical support to an active full stack developer role.',
       },
-      tags: ['Crystal Reports', 'SQL Server', 'Migração de Servidores', 'Criação de Relatórios', 'Manutenção de Views', 'Migração de Dados'],
+      tags: ['Crystal Reports', 'SQL Server', 'TypeScript', 'Angular', '.NET · C#', 'Migração de Servidores', 'Migração de Dados', 'Criação de Relatórios', 'Manutenção de Views', 'Regras de Negócio', 'Sistemas Complementares'],
     },
     {
       period: 'Julho 2022 — Junho 2024',
