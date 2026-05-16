@@ -70,7 +70,7 @@ export class Events {
       ],
     },
     {
-      name: 'Meetup Codecon #03',
+      name: 'Meetup Codecon #04',
       location: 'Curitiba, Brasil',
       date: '2025',
       sponsors: ['FullCycle', 'Neasure', 'OnlyOffice', 'Itaú'],

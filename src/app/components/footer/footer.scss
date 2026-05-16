@@ -81,12 +81,12 @@
 }
 
 .footer__big {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 5vw, 140px);
-  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 800;
   line-height: 1.0;
   color: var(--white);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   white-space: normal;
   word-break: break-word;
   display: block;
