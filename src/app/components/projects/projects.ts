@@ -192,8 +192,8 @@ export class Projects implements OnInit, OnDestroy {
       featured: true,
       period: 'Brasil · 2023',
       title: {
-        pt: 'Banco de Ocorrências · Gestão Interna',
-        en: 'Incident Log · Internal Management',
+        pt: 'Banco de Ocorrências · Site de Notícias e Validadores',
+        en: 'Incident Log · News Site & Validators',
       },
       description: {
         pt: 'Sistema interno desenvolvido para centralizar, padronizar e consultar ocorrências bancárias. O portal reúne em um único ambiente: o banco de ocorrências com seus códigos e descrições, os recursos de layouts bancários com títulos e especificações, e um site de notícias e publicações onde a equipe de suporte divulga comunicados, atualizações operacionais e informações relevantes vindas diretamente dos bancos. Construído com Angular no frontend e ASP.NET Core com C# no backend, integrado ao PostgreSQL. Utilizado por mais de 15 pessoas no suporte da empresa.',
@@ -203,6 +203,7 @@ export class Projects implements OnInit, OnDestroy {
         { pt: 'Banco de ocorrências bancárias com códigos, descrições e padronização centralizada', en: 'Banking incident log with codes, descriptions and centralised standardisation' },
         { pt: 'Recursos de layouts bancários: títulos, especificações e referências por banco emissor', en: 'Bank layout resources: titles, specifications and references by issuing bank' },
         { pt: 'Site de notícias e publicações com comunicados operacionais vindos diretamente dos bancos', en: 'News and publications site with operational announcements sourced directly from the banks' },
+        { pt: 'Consumo da API brapi.dev para exibição da cotação do dólar em tempo real na plataforma', en: 'Integration with brapi.dev API to display real-time dollar exchange rate on the platform' },
         { pt: 'Autenticação própria com redefinição de senha via SMTP — solução de baixo custo integrada ao fluxo do sistema', en: 'Custom authentication with password reset via SMTP — low-cost solution integrated into the system flow' },
         { pt: 'Validador integrado e mais de 15 usuários ativos no setor de suporte da empresa', en: 'Integrated validator and over 15 active users in the company\'s support team' },
       ],
