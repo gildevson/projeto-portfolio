@@ -207,7 +207,7 @@ export class Projects implements OnInit, OnDestroy {
         { pt: 'Autenticação própria com redefinição de senha via SMTP — solução de baixo custo integrada ao fluxo do sistema', en: 'Custom authentication with password reset via SMTP — low-cost solution integrated into the system flow' },
         { pt: 'Validador integrado e mais de 15 usuários ativos no setor de suporte da empresa', en: 'Integrated validator and over 15 active users in the company\'s support team' },
       ],
-      tags: ['ANGULAR', 'C#', 'SQL SERVER', '.NET'],
+      tags: ['ANGULAR', 'CHART.JS', 'C#', 'ASP.NET CORE', 'DAPPER', 'JWT', 'POSTGRESQL'],
       color: '#f59e0b',
       mockups: [
         { title: 'Home',        subtitle: 'Tela inicial',            image: 'BANCO_OCORRENCIA_HOME.png' },
@@ -256,7 +256,9 @@ export class Projects implements OnInit, OnDestroy {
       'REDIS': 'devicon-redis-plain',
       'NGINX': 'devicon-nginx-plain',
       'FIREBASE': 'devicon-firebase-plain',
+      'CHART.JS': 'devicon-chartjs-plain',
       'C#': 'devicon-csharp-plain',
+      'ASP.NET CORE': 'devicon-dot-net-plain',
       '.NET': 'devicon-dot-net-plain',
       '.NET 8': 'devicon-dot-net-plain',
       'SQL SERVER': 'devicon-microsoftsqlserver-plain',
