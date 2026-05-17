@@ -7,6 +7,10 @@
     padding: 48px 28px 72px;
   }
 
+  @media (max-width: 640px) {
+    padding: 40px 24px 48px;
+  }
+
   // ── Header ──────────────────────────────────────
   &__header {
     display: flex;
@@ -106,6 +110,11 @@
 
     @media (max-width: 1024px) {
       grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 640px) {
+      grid-template-rows: auto;
+      gap: 32px;
     }
   }
 
