@@ -16,10 +16,10 @@ export const translations: Record<Lang, Record<string, string>> = {
     // Welcome
     'welcome.label':     '— BEM-VINDO',
     'welcome.line1':     'Olá, eu sou o Gilson',
-    'welcome.line2':     'Desenvolvo',
-    'welcome.highlight': 'soluções',
-    'welcome.line2b':    'para',
-    'welcome.line3':     'problemas complexos',
+    'welcome.line2':     'Transformo',
+    'welcome.highlight': 'ideias',
+    'welcome.line2b':    'em',
+    'welcome.line3':     'software real',
     'welcome.p':         'Desenvolvedor Full Stack com experiência em C#, .NET, WPF, Node.js, React e Angular — atuando no desenvolvimento de aplicações web e desktop modernas, escaláveis e de alta performance, além de sistemas financeiros corporativos construídos de ponta a ponta. Sólida experiência com bancos de dados relacionais como SQL Server e PostgreSQL.',
     // About
     'about.label':       '— SOBRE MIM',

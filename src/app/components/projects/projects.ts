@@ -85,7 +85,7 @@ export class Projects implements OnInit, OnDestroy {
         en: 'Finanblue · Training Platform',
       },
       description: {
-        pt: 'Portal interno de vídeos, provas e exercícios criado para capacitar colaboradores nos produtos e sistemas da Finanblue. Funcionários bem treinados entregam um suporte de maior qualidade — o que fortalece diretamente os produtos que geram receita na empresa. Com o tempo, o sistema evoluiu para um módulo comercializado a clientes externos, passando a gerar receita própria e tornando-se parte estratégica do negócio.',
+        pt: 'Portal interno de vídeos, provas e exercícios criado para capacitar colaboradores nos produtos e sistemas da Finanblue. Funcionários bem treinados entregam um suporte de maior qualidade — fortalecendo diretamente os produtos e processos da empresa. Com o tempo, o sistema evoluiu para um módulo comercializado a clientes externos, passando a gerar receita própria e tornando-se parte estratégica do negócio.',
         en: 'Internal portal of videos, assessments and exercises built to train employees on Finanblue\'s products and systems. Well-trained staff deliver higher-quality support — directly strengthening the products that drive company revenue. Over time, the system evolved into a module sold to external clients, generating its own revenue and becoming a strategic part of the business.',
       },
       bullets: [
