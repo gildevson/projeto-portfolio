@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const a=require\\('./angular.json'\\); const proj=Object.keys\\(a.projects\\)[0]; const build=a.projects[proj].architect.build; console.log\\('project:', proj\\); console.log\\('outputPath:', JSON.stringify\\(build.options.outputPath\\)\\); console.log\\('builder:', build.builder\\);\")",
+      "Bash(node -e \"const a=require\\('./angular.json'\\); const proj=Object.keys\\(a.projects\\)[0]; const build=a.projects[proj].architect.build; console.log\\(JSON.stringify\\(build.options, null, 2\\)\\);\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\('engines:', p.engines\\); console.log\\('angular:', p.dependencies['@angular/core']\\);\")"
+    ]
+  }
+}
