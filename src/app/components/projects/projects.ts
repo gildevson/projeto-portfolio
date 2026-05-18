@@ -85,12 +85,12 @@ export class Projects implements OnInit, OnDestroy {
         en: 'Finanblue · Training Platform',
       },
       description: {
-        pt: 'Portal interno de vídeos, provas e exercícios criado para treinar colaboradores sobre os produtos e sistemas da Finanblue. Com o tempo, evoluiu para um sistema complementar ao principal software da empresa — hoje comercializado para clientes externos e gerando receita direta, tornando-se parte estratégica do negócio.',
-        en: 'Internal portal of videos, assessments and exercises built to train employees on Finanblue\'s products and systems. Over time, it evolved into a complementary system to the company\'s core software — now sold to external clients and generating direct revenue, becoming a strategic part of the business.',
+        pt: 'Portal interno de vídeos, provas e exercícios criado para capacitar colaboradores nos produtos e sistemas da Finanblue. Funcionários bem treinados entregam um suporte de maior qualidade — o que fortalece diretamente os produtos que geram receita na empresa. Com o tempo, o sistema evoluiu para um módulo comercializado a clientes externos, passando a gerar receita própria e tornando-se parte estratégica do negócio.',
+        en: 'Internal portal of videos, assessments and exercises built to train employees on Finanblue\'s products and systems. Well-trained staff deliver higher-quality support — directly strengthening the products that drive company revenue. Over time, the system evolved into a module sold to external clients, generating its own revenue and becoming a strategic part of the business.',
       },
       bullets: [
-        { pt: 'Sistema complementar ao software principal da empresa, gerando receita para o negócio', en: 'Complementary system to the company\'s core software, generating revenue for the business' },
-        { pt: 'Módulo extra da plataforma principal em produção com mais de 30 usuários ativos — vendido a clientes externos', en: 'Extra module of the main platform in production with 30+ active users — sold to external clients' },
+        { pt: 'Capacitação de colaboradores que atuam no suporte dos produtos que geram receita na empresa', en: 'Training of employees who support the products that drive company revenue' },
+        { pt: 'Módulo comercializado a clientes externos com mais de 30 usuários ativos em produção', en: 'Module sold to external clients with over 30 active users in production' },
         { pt: 'Melhorias contínuas: novos módulos, trilhas de aprendizado e experiência do usuário', en: 'Continuous improvements: new modules, learning paths and user experience upgrades' },
         { pt: 'Geração de certificados em PDF, upload para AWS S3 e autenticação JWT com Passport', en: 'PDF certificate generation, AWS S3 upload and JWT authentication with Passport' },
       ],

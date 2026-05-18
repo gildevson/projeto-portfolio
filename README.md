@@ -72,7 +72,45 @@ http://localhost:4200
 ng build
 ```
 
-Os arquivos gerados ficam em `dist/portfolio/browser/`. Podem ser publicados em qualquer serviço de hospedagem estática (Vercel, Netlify, GitHub Pages, etc).
+Os arquivos gerados ficam em `dist/` (configurado via `outputPath` no `angular.json`).
+
+---
+
+## Deploy na Hostinger
+
+### Configurações de compilação
+
+| Campo | Valor |
+| --- | --- |
+| Configuração predefinida | Angular |
+| Branch | main |
+| Versão do Node | 22.x |
+| Output directory | `dist` |
+
+### Erro 403 Forbidden — causa e solução
+
+**Causa:** O Angular 17+ com o builder `@angular/build:application` gera os arquivos em `dist/[nome-projeto]/browser/` por padrão. Sem um `outputPath` explícito no `angular.json`, o Hostinger não encontra o `index.html` e retorna **403 Forbidden**.
+
+**Solução 1 — `angular.json`:** Definir o `outputPath` para que os arquivos fiquem direto em `dist/`, sem subpastas:
+
+```json
+"outputPath": {
+  "base": "dist",
+  "browser": ""
+}
+```
+
+**Solução 2 — `.htaccess`:** O Hostinger usa Apache. Sem esse arquivo, qualquer rota do Angular (ex: `/privacy`) faz o Apache procurar uma pasta física que não existe, retornando erro. O arquivo `public/.htaccess` redireciona tudo para o `index.html` e deixa o Angular gerenciar as rotas:
+
+```apache
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.html [L,QSA]
+```
+
+> Este arquivo fica em `public/` e é copiado automaticamente para o output no build.
 
 ---
 
